@@ -53,7 +53,7 @@
 			include_once VIEWS.'sk_bottom.php';
 		}
 
-		public static function displayViews() {
+		public static function displayViews($viewsArray) {
 			$data = self::$_data;
 			if(is_array($viewsArray)) {
 				foreach($viewsArray as $elt)
