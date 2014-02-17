@@ -1,6 +1,6 @@
 <?php
 	function __autoload($classname) {
-		$arr = array(MODELS,VENDOR);
+		$arr = array(MODELS,APP);
 		foreach ($arr as $elt) {
 			$filename = $elt.$classname.'.php';
 			
