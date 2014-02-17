@@ -5,11 +5,12 @@
 	define('VIEWS', DIR_ROOT.'views/');	
 	define('MODELS',DIR_ROOT.'models/');
 	define('APP',DIR_ROOT.'app/');
+	define('ASSETS', DIR_ROOT.'assets/');
 
 	include_once APP."Core.php";
 	$data = new Registry;
+	
 	ViewManager::init($data);
 	Router::init($data);
-	ModelManager::init($data);
 	Core::init($data);
 ?>
