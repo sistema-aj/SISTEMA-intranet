@@ -1,5 +1,5 @@
 <?php
-	class BDD {
+	class bdd {
 	/* PRIVATE CLASS ATTRIBUTES */
 		private static $_pdo;
 		
