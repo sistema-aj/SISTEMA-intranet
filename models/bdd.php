@@ -1,5 +1,5 @@
 <?php
-	class bdd {
+	class BDD {
 	/* PRIVATE CLASS ATTRIBUTES */
 		private static $_pdo;
 		
@@ -28,5 +28,13 @@
 			$result = self::$_pdo->query("SELECT * FROM ".$table." ORDER BY ".$order);
 			$result->setFetchMode(PDO::FETCH_OBJ);
 			return $result;
+		}
+
+		public static function getLogin($login, $mdp) {
+			$result = self::$_pdo->prepare("SELECT user, type FROM login WHERE login = :login AND mdp = :mdp");
+			$result->bindParam(":login", $login, PDO::PARAM_STR);
+			$result->bindParam(":mdp", $mdp, PDO::PARAM_STR);
+			$result->execute()->setFetchMode(PDO::FETCH_OBJ);
+			return $result;	
 		}
 	}
