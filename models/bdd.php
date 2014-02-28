@@ -2,15 +2,10 @@
 	class bdd {
 	/* PRIVATE CLASS ATTRIBUTES */
 		private static $_pdo;
-		private static $_hote = '127.0.0.1';
-		private static $_port = '3306';
-		private static $_bd='sistema'; // le nom de votre base de données
-		private static $_user='root'; // nom d'utilisateur pour se connecter
-		private static $_pswd=''; // mot de passe de l'utilisateur pour se connecter
 		
 	/* STATIC METHODS */
 		public static function init() {
-			self::$_pdo = new PDO('mysql:host='.self::$_hote.';port='.self::$_port.';dbname='.self::$_bd, self::$_user, self::$_pswd);
+			self::$_pdo = new PDO('mysql:host='.Config::$_bdHote.';port='.Config::$_bdPort.';dbname='.config::$_bdName, Config::$_bdUser, Config::$_bdPassword);
 			self::$_pdo->exec("SET CHARACTER SET utf8");
 		}
 
