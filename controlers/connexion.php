@@ -12,7 +12,7 @@
 				$_SESSION['user_id'] = $user->user;
 				$_SESSION['user_type'] = $user->type;
 				// redirection vers l'accueil
-				header('home'); 
+				header('Location: home');
 			} else { // affiche message erreur : données incorrectes
 				$data->error = "Le login ou mot de passe est incorrect";
 			}
