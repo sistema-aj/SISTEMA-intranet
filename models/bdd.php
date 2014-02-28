@@ -34,7 +34,10 @@
 			$result = self::$_pdo->prepare("SELECT user, type FROM login WHERE login = :login AND mdp = :mdp");
 			$result->bindParam(":login", $login, PDO::PARAM_STR);
 			$result->bindParam(":mdp", $mdp, PDO::PARAM_STR);
-			$result->execute()->setFetchMode(PDO::FETCH_OBJ);
+			// execution de la requête, et récupération sous forme de tableau associatif.
+			$result->execute();
+			$result->setFetchMode(PDO::FETCH_OBJ);
+			$result = $result->fetch();
 			return $result;	
 		}
 	}
