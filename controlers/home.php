@@ -5,7 +5,7 @@
 
 	switch ($_SESSION['user_type']) {
 		case 'A':
-			ViewManager::displayViews(array());
+			ViewManager::displayViews(array("aHome", "aMenu", "aSubMenu"));
 			break;
 		case 'C':
 			ViewManager::displayViews(array());
