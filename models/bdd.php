@@ -40,4 +40,12 @@
 			$result = $result->fetch();
 			return $result;	
 		}
+
+		public static function getInactiveAdh() {
+			$result = self::$_pdo->query("SELECT * FROM utilisateur JOIN adherent ON utilisateur.id = adherent.id 
+								WHERE actif = 0");
+			$result->setFetchMode(PDO::FETCH_OBJ);
+			$result = $result->fetchAll();
+			return $result;
+		}
 	}
