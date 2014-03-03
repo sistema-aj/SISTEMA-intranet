@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Dim 02 Mars 2014 à 20:39
+-- Généré le: Lun 03 Mars 2014 à 18:25
 -- Version du serveur: 5.6.12-log
 -- Version de PHP: 5.4.12
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Base de données: `sistema`
 --
-CREATE DATABASE IF NOT EXISTS `sistema` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+CREATE DATABASE IF NOT EXISTS `sistema` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `sistema`;
 
 -- --------------------------------------------------------
@@ -30,8 +30,8 @@ USE `sistema`;
 
 CREATE TABLE IF NOT EXISTS `adherent` (
   `id` int(11) NOT NULL DEFAULT '0',
-  `nom` varchar(64) CHARACTER SET latin1 NOT NULL,
-  `prenom` varchar(64) CHARACTER SET latin1 NOT NULL,
+  `nom` varchar(64) NOT NULL,
+  `prenom` varchar(64) NOT NULL,
   `promo` varchar(3) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -53,8 +53,8 @@ INSERT INTO `adherent` (`id`, `nom`, `prenom`, `promo`) VALUES
 
 CREATE TABLE IF NOT EXISTS `administrateur` (
   `id` int(11) NOT NULL DEFAULT '0',
-  `nom` varchar(64) CHARACTER SET latin1 NOT NULL,
-  `prenom` varchar(64) CHARACTER SET latin1 NOT NULL,
+  `nom` varchar(64) NOT NULL,
+  `prenom` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -75,7 +75,7 @@ INSERT INTO `administrateur` (`id`, `nom`, `prenom`) VALUES
 
 CREATE TABLE IF NOT EXISTS `client` (
   `id` int(11) NOT NULL DEFAULT '0',
-  `raisonSociale` varchar(128) CHARACTER SET latin1 NOT NULL,
+  `raisonSociale` varchar(128) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -243,10 +243,10 @@ CREATE TABLE IF NOT EXISTS `projet` (
 CREATE TABLE IF NOT EXISTS `utilisateur` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `telephone` char(10) NOT NULL,
-  `mail` varchar(128) CHARACTER SET latin1 NOT NULL,
-  `adresse` varchar(128) CHARACTER SET latin1 NOT NULL,
+  `mail` varchar(128) NOT NULL,
+  `adresse` varchar(128) NOT NULL,
   `codePostal` int(5) NOT NULL,
-  `ville` varchar(48) CHARACTER SET latin1 NOT NULL,
+  `ville` varchar(48) NOT NULL,
   `actif` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
