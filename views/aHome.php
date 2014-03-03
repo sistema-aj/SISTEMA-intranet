@@ -28,6 +28,6 @@
 		<th>Mail</th>
 		<th>Projet</th>
 		<th>CV</th>
-		<th></th>
+		<th>Validation</th>
 	</tr>
 </table>
