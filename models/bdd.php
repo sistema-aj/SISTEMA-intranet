@@ -1,15 +1,35 @@
 <?php
+
+	/**
+	 * @package Models
+	 * @var     $_pdo
+	 */
 	class bdd {
 	/* PRIVATE CLASS ATTRIBUTES */
 		private static $_pdo;
 		
 	/* STATIC METHODS */
+
+		/**
+		 * initialise la connection avec la base de données 
+		 * 
+		 * @author  Deleuil Maxime 
+		 * @version 1
+		 */
 		public static function init() 
 		{
 			self::$_pdo = new PDO('mysql:host='.Config::$_bdHote.';port='.Config::$_bdPort.';dbname='.config::$_bdName, Config::$_bdUser, Config::$_bdPassword);
 			self::$_pdo->exec("SET CHARACTER SET utf8");
 		}
 		
+		/**
+		 * récupère le contenu d'une table 
+		 * 
+		 * @author  Deleuil Maxime
+		 * @param   String $table 
+		 * @return  array
+		 * @version 1
+		 */
 		public static function getAllByTable($table) 
 		{
 			try
@@ -24,6 +44,16 @@
 				return $e;
 			}
 		}
+
+		/**
+		 * récupère le contenu d'une table selon l'identifiant
+		 * 
+		 * @author  Deleuil Maxime
+		 * @param   type $table 
+		 * @param   type $id 
+		 * @return  array
+		 * @version 1
+		 */
 		public static function getById($table, $id) 
 		{
 			try
@@ -39,6 +69,15 @@
 			}
 		}
 
+		/**
+		 * récupère le contenu d'une table, trié selon le chammp passé en parametre 
+		 * 
+		 * @author  Deleuil Maxime 
+		 * @param   type $table 
+		 * @param   type $arrColumn 
+		 * @return  type
+		 * @version 1
+		 */
 		public static function getAllByTableOrderBy($table, $arrColumn) 
 		{
 			try
@@ -57,6 +96,16 @@
 			}
 		}
 
+		/**
+		 * Verifie la veracité du couple Login/MDP
+		 * 
+		 * @todo   ajouter la gestion du salt
+		 * @author Deleuil Maxime 
+		 * @param  String $login 
+		 * @param  String $mdp 
+		 * @return boolean 
+		 * @version 1
+		 */
 		public static function getLogin($login, $mdp) 
 		{
 			try
@@ -76,6 +125,12 @@
 			}
 		}
 
+		/**
+		 *  récupère la liste des adherents inactifs 
+		 * @author  Deleuil Maxime
+		 * @return  array
+		 * @version 1
+		 */
 		public static function getInactiveAdh() 
 		{
 			try
@@ -93,6 +148,12 @@
 			}
 		}
 
+		/**
+		 *  récupère la liste des adherents demandant à participer à un projet
+		 * @author
+		 * @return type
+		 * @version 1
+		 */
 		public static function getAdhesionsPro()
 		{
 			try 
