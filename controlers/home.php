@@ -6,6 +6,7 @@
 	switch ($_SESSION['user_type']) {
 		case 'A':
 			$data->inactiveUser = bdd::getInactiveAdh();
+			$data->adhesionsPro = bdd::getAdhesionsPro();
 			ViewManager::displayViews(array("aMenu", "aSubMenu", "aHome"));
 			break;
 		case 'C':

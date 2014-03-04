@@ -14,7 +14,10 @@
 		<td><?php echo $user->promo; ?></td>
 		<td><?php echo $user->telephone; ?></td>
 		<td><?php echo $user->mail; ?></td>
-		<td></td>
+		<td>
+			<a href=""><img src="check-mark.png"/></a>
+			<a href=""><img src="x-mark.png"/></a>
+		</td>
 	</tr>
 	<?php } ?>
 </table>
@@ -30,4 +33,21 @@
 		<th>CV</th>
 		<th>Validation</th>
 	</tr>
+	<?php foreach ($data->adhesionsPro as $user) { ?>
+	<tr>
+		<td><?php echo $user->nom; ?></td>
+		<td><?php echo $user->prenom; ?></td>
+		<td><?php echo $user->promo; ?></td>
+		<td><?php echo $user->telephone; ?></td>
+		<td><?php echo $user->mail; ?></td>
+		<td><?php echo $user->titre; ?></td>
+		<td>
+			<a href=""><img src="file.png"/></a>
+		</td>
+		<td>
+			<a href=""><img src="check-mark.png"/></a>
+			<a href=""><img src="x-mark.png"/></a>
+		</td>
+	</tr>
+	<?php } ?>
 </table>
