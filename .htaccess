@@ -6,3 +6,5 @@ RewriteRule ^([a-zA-Z0-9\-\_]*)$ index.php?page=$1
 RewriteRule ^([a-zA-Z0-9\-\_]*)/([a-zA-Z0-9\-\_]*)$ index.php?page=$1&action=$2
 RewriteRule ([a-zA-Z0-9\-\_\.]*).css$ assets/css/$1.css
 RewriteRule ([a-zA-Z0-9\-\_\.]*).js$ assets/js/$1.js
+RewriteRule ([a-zA-Z0-9\-\_\.]*).(png)$ assets/img/$1.png
+RewriteRule ([a-zA-Z0-9\-\_\.]*).(jpg)$ assets/img/$1.jpg
