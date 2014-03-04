@@ -29,7 +29,7 @@ USE `sistema`;
 --
 
 CREATE TABLE IF NOT EXISTS `adherent` (
-  `id` int(11) NOT NULL DEFAULT '0',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(64) NOT NULL,
   `prenom` varchar(64) NOT NULL,
   `promo` varchar(3) NOT NULL,
@@ -52,7 +52,7 @@ INSERT INTO `adherent` (`id`, `nom`, `prenom`, `promo`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `administrateur` (
-  `id` int(11) NOT NULL DEFAULT '0',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(64) NOT NULL,
   `prenom` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
@@ -74,7 +74,7 @@ INSERT INTO `administrateur` (`id`, `nom`, `prenom`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `client` (
-  `id` int(11) NOT NULL DEFAULT '0',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `raisonSociale` varchar(128) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -95,7 +95,7 @@ INSERT INTO `client` (`id`, `raisonSociale`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `competences` (
-  `id` int(11) NOT NULL DEFAULT '0',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(48) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -107,8 +107,8 @@ CREATE TABLE IF NOT EXISTS `competences` (
 --
 
 CREATE TABLE IF NOT EXISTS `detenir` (
-  `user` int(11) NOT NULL DEFAULT '0',
-  `competence` int(11) NOT NULL DEFAULT '0',
+  `user` int(11) NOT NULL,
+  `competence` int(11) NOT NULL,
   PRIMARY KEY (`user`,`competence`),
   KEY `competence` (`competence`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -120,7 +120,7 @@ CREATE TABLE IF NOT EXISTS `detenir` (
 --
 
 CREATE TABLE IF NOT EXISTS `fichiers` (
-  `id` int(11) NOT NULL DEFAULT '0',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `titre` varchar(128) NOT NULL,
   `filePath` varchar(255) NOT NULL,
   `type` varchar(48) NOT NULL,
@@ -136,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `fichiers` (
 --
 
 CREATE TABLE IF NOT EXISTS `incidents` (
-  `id` int(11) NOT NULL DEFAULT '0',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `titre` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `projet` int(11) NOT NULL,
@@ -151,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `incidents` (
 --
 
 CREATE TABLE IF NOT EXISTS `log` (
-  `id` int(11) NOT NULL DEFAULT '0',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user` int(11) NOT NULL,
   `type` varchar(48) NOT NULL,
   `date` datetime NOT NULL,
@@ -167,7 +167,7 @@ CREATE TABLE IF NOT EXISTS `log` (
 --
 
 CREATE TABLE IF NOT EXISTS `login` (
-  `login` varchar(48) NOT NULL DEFAULT '',
+  `login` varchar(48) NOT NULL,
   `mdp` varchar(48) NOT NULL,
   `type` char(1) NOT NULL,
   `user` int(11) NOT NULL,
@@ -197,8 +197,8 @@ INSERT INTO `login` (`login`, `mdp`, `type`, `user`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `necessite` (
-  `projet` int(11) NOT NULL DEFAULT '0',
-  `competence` int(11) NOT NULL DEFAULT '0',
+  `projet` int(11) NOT NULL,
+  `competence` int(11) NOT NULL,
   PRIMARY KEY (`projet`,`competence`),
   KEY `competence` (`competence`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -210,9 +210,10 @@ CREATE TABLE IF NOT EXISTS `necessite` (
 --
 
 CREATE TABLE IF NOT EXISTS `participer` (
-  `user` int(11) NOT NULL DEFAULT '0',
-  `projet` int(11) NOT NULL DEFAULT '0',
-  `chefProjet` tinyint(1) NOT NULL DEFAULT '0',
+  `user` int(11) NOT NULL,
+  `projet` int(11) NOT NULL,
+  `chefProjet` tinyint(1) NOT NULL DEFAULT 0,
+  `status` char(1) NOT NULL DEFAULT `A`,
   PRIMARY KEY (`user`,`projet`),
   KEY `projet` (`projet`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -224,7 +225,7 @@ CREATE TABLE IF NOT EXISTS `participer` (
 --
 
 CREATE TABLE IF NOT EXISTS `projet` (
-  `id` int(11) NOT NULL DEFAULT '0',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `titre` varchar(128) NOT NULL,
   `description` text,
   `type` varchar(128) NOT NULL,
