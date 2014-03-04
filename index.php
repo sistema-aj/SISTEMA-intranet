@@ -1,4 +1,5 @@
 <?php
+	define('URL_ROOT', str_replace('index.php', '', "http://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']));
 	define('DIR_ROOT', str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']));
 	// GENERIC REPOSITORIES
 	define('CTR', DIR_ROOT.'controlers/');
