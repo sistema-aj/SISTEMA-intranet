@@ -246,7 +246,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `telephone` char(10) NOT NULL,
   `mail` varchar(128) NOT NULL,
   `adresse` varchar(128) NOT NULL,
-  `codePostal` int(5) NOT NULL,
+  `codePostal` char(5) NOT NULL,
   `ville` varchar(48) NOT NULL,
   `actif` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
@@ -257,15 +257,15 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`id`, `telephone`, `mail`, `adresse`, `codePostal`, `ville`, `actif`) VALUES
-(1, '0102030405', 'admin1@sistema.fr', '26 rue de la paix', 13006, 'Marseille', 1),
-(2, '0203040506', 'sistemator@sistema.fr', '56 avenue des braves', 13005, 'Marseille', 1),
-(3, '0304050607', 'techo@sistema.fr', '48 une rue au fond à droite', 13112, 'Aix En Provence', 1),
-(4, '0405060708', 'corpo.contact@corpo.fr', 'une autre rue', 13005, 'Marseille', 1),
-(5, '0506070809', 'contact.supplyFly@suppyF.fr', 'ha, une avenue !', 13115, 'Aix En Provence', 1),
-(6, '0607080909', 'vivaFiesta@gmail.fr', '42 Cours Mirabeau', 13006, 'Marseille', 1),
-(7, '0708090909', 'franck.venuzzi@gmail.fr', 'ho, une impasse', 13556, 'Marignane', 0),
-(8, '0809090909', 'emilie.dubois@yahoo.fr', 'inconnue', 13112, 'Aix-En-Provence', 1),
-(9, '0909090909', 'lecomte@gmail.com', 'Au dessus du kebab', 13006, 'Marseille', 1);
+(1, '0102030405', 'admin1@sistema.fr', '26 rue de la paix', '13006', 'Marseille', 1),
+(2, '0203040506', 'sistemator@sistema.fr', '56 avenue des braves', '13005', 'Marseille', 1),
+(3, '0304050607', 'techo@sistema.fr', '48 une rue au fond à droite', '13112', 'Aix En Provence', 1),
+(4, '0405060708', 'corpo.contact@corpo.fr', 'une autre rue', '13005', 'Marseille', 1),
+(5, '0506070809', 'contact.supplyFly@suppyF.fr', 'ha, une avenue !', '13115', 'Aix En Provence', 1),
+(6, '0607080909', 'vivaFiesta@gmail.fr', '42 Cours Mirabeau', '13006', 'Marseille', 1),
+(7, '0708090909', 'franck.venuzzi@gmail.fr', 'ho, une impasse', '13556', 'Marignane', 0),
+(8, '0809090909', 'emilie.dubois@yahoo.fr', 'inconnue', '13112', 'Aix-En-Provence', 1),
+(9, '0909090909', 'lecomte@gmail.com', 'Au dessus du kebab', '13006', 'Marseille', 1);
 
 --
 -- Contraintes pour les tables exportées
