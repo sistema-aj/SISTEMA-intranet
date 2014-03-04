@@ -1,15 +1,17 @@
 <?php
 
 	/**
-	 * 
-	 * @package Model
+	 * @package Models
 	 */
 
 	class Adherents {
 
 		/**
 		 * retourne la liste des adherents 
-		 * @return array liste d'identifiants
+		 * 
+		 * @author 
+		 * @return  array liste d'identifiants
+		 * @version 0
 		 */
 		public static function getAdherents() {
 
@@ -17,18 +19,25 @@
 
 		/**
 		 * retourne un adherent à partir de son identifiant
-		 * @param  identifiant de l'adherent 
-		 * @return adherent  Objet adherent correspondant à l'identifiant 
+		 * 
+		 * @author 
+		 * @param   $idAdherent  identifiant de l'adherent 
+		 * @return  adherent     Objet adherent correspondant à l'identifiant 
+		 * @version 0
 		 */
-		public static function getDetailAdherent($identifiant) {
+		public static function getDetailAdherent($idAdherent) {
 
 		}
 
 		/**
-		 * retourne la liste des adherents participant au projet passé en parametres
-		 * @return Array liste d'identifiants
+		 * retourne la liste des adherents participant à un projet
+		 * 
+		 * @author
+		 * @param   $idProjet  identifiant du projet
+		 * @return  Array      liste d'identifiants
+		 * @version 0
 		 */
-		public static function getAdherentsParProjet() {
+		public static function getAdherentsParProjet($idProjet) {
 
 		}
 	}
