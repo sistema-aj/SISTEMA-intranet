@@ -42,10 +42,30 @@
 		}
 
 		public static function getInactiveAdh() {
-			$result = self::$_pdo->query("SELECT * FROM utilisateur JOIN adherent ON utilisateur.id = adherent.id 
+			$result = self::$_pdo->query("SELECT nom, prenom, promo, telephone, mail 
+								FROM utilisateur JOIN adherent ON utilisateur.id = adherent.id 
 								WHERE actif = 0");
 			$result->setFetchMode(PDO::FETCH_OBJ);
 			$result = $result->fetchAll();
 			return $result;
+		}
+
+		public static function getAdhesionsPro()
+		{
+			try 
+			{
+				$result = self::$_pdo->query("SELECT nom, prenom, promo, telephone, mail, titre
+									FROM utilisateur JOIN adherent ON utilisateur.id = adherent.id 
+									JOIN participer ON utilisateur.id = participer.user
+									JOIN projet ON projet.id = participer.projet
+									WHERE status = 'A'");
+				$result->setFetchMode(PDO::FETCH_OBJ);
+				$result = $result->fetchAll();
+				return $result;
+			} 
+			catch(Exception $e)
+			{
+				return "Erreur à définir";
+			}
 		}
 	}
