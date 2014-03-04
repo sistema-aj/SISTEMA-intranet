@@ -218,6 +218,14 @@ CREATE TABLE IF NOT EXISTS `participer` (
   KEY `projet` (`projet`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Contenu de la table `participer`
+--
+
+INSERT INTO `participer` (`user`, `projet`) VALUES
+(8, 1),
+(9, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -229,11 +237,18 @@ CREATE TABLE IF NOT EXISTS `projet` (
   `titre` varchar(128) NOT NULL,
   `description` text,
   `type` varchar(128) NOT NULL,
-  `archive` tinyint(1) NOT NULL DEFAULT '1',
+  `archive` tinyint(1) NOT NULL DEFAULT '0',
   `client` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `client` (`client`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `projet`
+--
+
+INSERT INTO `projet` (`titre`, `description`, `type`, `client`) VALUES
+('site Viva Fiesta', 'Développer le site vitrine du magasin Viva Fiesta. (fake)', 'Web', 6);
 
 -- --------------------------------------------------------
 
