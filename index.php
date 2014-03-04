@@ -7,6 +7,7 @@
 	define('APP',DIR_ROOT.'app/');
 	define('ASSETS', DIR_ROOT.'assets/');
 
+	session_start();
 	include_once APP."Core.php";
 	$data = new Registry;
 	

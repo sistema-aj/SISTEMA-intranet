@@ -1,9 +1,21 @@
 <?php
 	ViewManager::setActiveCss(array('general'));
 
-	// ici -> ajout script utilisateur
-
 	ViewManager::displayHeader();
-	ViewManager::displayViews(array('home'));
+
+	switch ($_SESSION['user_type']) {
+		case 'A':
+			$data->inactiveUser = bdd::getInactiveAdh();
+			$data->adhesionsPro = bdd::getAdhesionsPro();
+			ViewManager::displayViews(array("aMenu", "aSubMenu", "aHome"));
+			break;
+		case 'C':
+			ViewManager::displayViews(array());
+			break;
+		case 'E':
+			ViewManager::displayViews(array());
+			break;	
+	}
+
 	ViewManager::displayFooter();
 ?>
