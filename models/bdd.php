@@ -172,4 +172,27 @@
 				return $e;
 			}
 		}
+
+		/**
+		 *  récupère la liste des adherents actifs 
+		 * @author  Deleuil Maxime
+		 * @return  array
+		 * @version 1
+		 */
+		public static function getActiveAdh() 
+		{
+			try
+			{
+				$result = self::$_pdo->query("SELECT nom, prenom, promo, telephone, mail 
+								FROM utilisateur JOIN adherent ON utilisateur.id = adherent.id 
+								WHERE actif = 1");
+				$result->setFetchMode(PDO::FETCH_OBJ);
+				$result = $result->fetchAll();
+				return $result;
+			}
+			catch(Exception $e)
+			{
+				return $e;
+			}
+		}
 	}
