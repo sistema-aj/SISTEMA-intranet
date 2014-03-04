@@ -213,7 +213,7 @@ CREATE TABLE IF NOT EXISTS `participer` (
   `user` int(11) NOT NULL,
   `projet` int(11) NOT NULL,
   `chefProjet` tinyint(1) NOT NULL DEFAULT 0,
-  `status` char(1) NOT NULL DEFAULT `A`,
+  `status` char(1) NOT NULL DEFAULT 'A',
   PRIMARY KEY (`user`,`projet`),
   KEY `projet` (`projet`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
