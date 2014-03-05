@@ -23,8 +23,10 @@
 						ViewManager::displayViews(array("aMenu", "aSubMenu", "404"));
 						break;
 				}
-			} else
+			} else {
+				$data->activeUser = bdd::getActiveAdh();
 				ViewManager::displayViews(array("aMenu", "aSubMenu", "aAdhListe"));
+			}
 			break;
 		default:
 			ViewManager::displayViews(array("404"));
