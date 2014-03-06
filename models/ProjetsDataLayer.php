@@ -173,7 +173,7 @@
 		/**
 		 * récupère la liste des Adherents demandant a adherer a un projet.
 		 * 
-		 * @author 
+		 * @author  Guemas Anthony
 		 * @return 	array 	Liste d'adherents 
 		 * @version 0
 		 */
