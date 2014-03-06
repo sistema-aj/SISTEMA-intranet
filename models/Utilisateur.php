@@ -6,6 +6,8 @@
 	 * @var 	$tel
 	 * @var     $mail
 	 * @var     $adresse
+	 * @var 	$codePostal
+	 * @var 	$ville
 	 * @var     $actif
 	 */
 	class Utilisateur	
@@ -14,20 +16,24 @@
 		protected $tel;
 		protected $mail;
 		protected $adresse;
+		protected $codePostal;
+		protected $ville;
 		protected $actif;
 
 		/**
 		 * Constructeur d'Utilisateur
 		 * 
 		 * @author 	 Guemas Anthony
-		 * @version  1
+		 * @version  1.1.0
 		 */
-		public __construct($id, $tel, $mail, $adresse, $actif)
+		public __construct($id, $tel, $mail, $adresse, $codePostal, $ville, $actif)
 		{
 			$this->id 		= $id;
 			$this->tel		= $tel;
 			$this->mail 	= $mail;
 			$this->adresse  = $adresse;
+			$this->codePostal = $codePostal;
+			$this->ville 	= $ville;
 			$this->actif 	= $actif;
 		}
 	}
