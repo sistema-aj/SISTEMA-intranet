@@ -3,7 +3,8 @@
 	/**
 	 * @package Models
 	 */
-	class Incidents {
+	class Incidents 
+	{
 
 		/**
 		 * récupère la liste d'incidents du projet
