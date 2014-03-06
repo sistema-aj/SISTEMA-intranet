@@ -19,7 +19,7 @@
 			try
 			{
 				// recuperation des informations
-				$result = bdd::$_pdo->prepare(" SELECT id, titre, description, type, archive
+				$result = bdd::$_pdo->prepare(" SELECT titre, description, type, status
 												FROM projet JOIN client ON client.id = projet.client 
 												AND projet.client = :id");
 
@@ -47,7 +47,7 @@
 			try
 			{
 				// recuperation des informations
-				$result = bdd::$_pdo->prepare(" SELECT titre, description, type, archive
+				$result = bdd::$_pdo->prepare(" SELECT titre, description, type, status
 												FROM   projet JOIN client ON client.id = projet.client 
 												AND    projet.client = :id"
 											  );
@@ -84,11 +84,11 @@
 			try
 			{
 				// recuperation des informations
-				$result = bdd::$_pdo->prepare(" SELECT   id, titre, description, type, archive
-												FROM     projet JOIN participer ON projet.id = participer.projet 
-												WHERE 	 projet.id NOT IN participer.projet
-												ORDER BY :tri"
-											 );
+				$result = bdd::$_pdo->prepare(" SELECT   titre, description, type, status
+												FROM     projet
+												WHERE 	 status = 'N'
+												ORDER BY :tri	
+											 ");
 
 				$result->bindParam(":tri", $critereTri, PDO::PARAM_INT);
 				$result = $result->fetchAll();
@@ -114,11 +114,11 @@
 			try
 			{
 				// recuperation des informations
-				$result = bdd::$_pdo->prepare(" SELECT   id, titre, description, type, archive
-												FROM     projet JOIN participer ON projet.id = participer.projet 
-												WHERE 	 projet.id IN participer.projet
-												ORDER BY :tri"
-											 );
+				$result = bdd::$_pdo->prepare(" SELECT DISTINCT  id, titre, description, type, status
+												FROM             projet 
+												WHERE 	         status NOT IN ('N')
+												ORDER BY         :tri
+											 ");
 
 				$result->bindParam(":tri", $critereTri, PDO::PARAM_INT);
 				$result = $result->fetchAll();
@@ -146,12 +146,12 @@
 				$titre 		 = $projet->titre;
 				$description = $projet->description;
 				$type  		 = $projet->type;
-				$archive 	 = $projet->archive;
+				$status		 = $projet->status;
 				$client 	 = $projet->client;
 
 				// recuperation des informations
-					$insert = bdd::$_pdo->prepare(" INSERT INTO  projet( titre,  description,  type,  archive,  client)
-													VALUES 		       (:titre, :description, :type, :archive, :client)
+					$insert = bdd::$_pdo->prepare(" INSERT INTO  projet( titre,  description,  type,  status,  client)
+													VALUES 		       (:titre, :description, :type, :status, :client)
 												 ");
 
 				$insert->execute( 
@@ -159,7 +159,7 @@
 											'titre' 	  => $titre ,
 											'description' => $description ,
 											'type'		  => $type ,
-											'archive'	  => $archive , 
+											'status'	  => $status , 
 											'client'	  => $client
 										)
 								);
@@ -182,7 +182,7 @@
 			try
 			{
 				// recuperation des informations
-				$result = bdd::$_pdo->prepare(" SELECT   telephone, mail, adresse, codePostal,, ville, actif, nom, prenom, promo
+				$result = bdd::$_pdo->prepare(" SELECT   telephone, mail, adresse, codePostal, ville, actif, nom, prenom, promo
 												FROM     utilisateur JOIN adherent   ON utilisateur.id = adherent.id
 																	 JOIN participer ON adherent.id = participer.user 
 												WHERE 	 participer.status = 'A'	
@@ -210,11 +210,11 @@
 			try
 			{
 				// recuperation des informations
-				$result = bdd::$_pdo->prepare(" SELECT   telephone, mail, adresse, codePostal,, ville, actif, nom, prenom, promo
+				$result = bdd::$_pdo->prepare(" SELECT   telephone, mail, adresse, codePostal, ville, actif, nom, prenom, promo
 												FROM     utilisateur JOIN adherent   ON utilisateur.id = adherent.id
 																	 JOIN participer ON adherent.id = participer.user 
 												WHERE 	 participer.status = 'A'
-												AND 	 projet.id = :id	
+												AND 	 participer.projet = :id	
 											 ");
 				$result->bindParam(":id", $projet->id, PDO::PARAM_INT);
 				$result = $result->fetchAll();
