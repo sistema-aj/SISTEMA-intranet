@@ -213,7 +213,7 @@ CREATE TABLE IF NOT EXISTS `participer` (
   `user` int(11) NOT NULL,
   `projet` int(11) NOT NULL,
   `chefProjet` tinyint(1) NOT NULL DEFAULT 0,
-  `status` char(1) NOT NULL DEFAULT 'A',
+  `status` char(1) NOT NULL DEFAULT 'N',  -- A - affecté / N - non afffecté / T - terminé --
   PRIMARY KEY (`user`,`projet`),
   KEY `projet` (`projet`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -222,9 +222,10 @@ CREATE TABLE IF NOT EXISTS `participer` (
 -- Contenu de la table `participer`
 --
 
-INSERT INTO `participer` (`user`, `projet`) VALUES
-(8, 1),
-(9, 1);
+INSERT INTO `participer` (`user`, `projet`,  `chefProjet `,  `status `) VALUES
+(8, 1, 0, 'A'),
+(9, 1, 0, 'A');
+(7, 1, 1, 'O');
 
 -- --------------------------------------------------------
 
@@ -237,7 +238,7 @@ CREATE TABLE IF NOT EXISTS `projet` (
   `titre` varchar(128) NOT NULL,
   `description` text,
   `type` varchar(128) NOT NULL,
-  `archive` tinyint(1) NOT NULL DEFAULT '0',
+  `status` char(1) NOT NULL DEFAULT '',
   `client` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `client` (`client`)
