@@ -4,7 +4,7 @@
 	 * @package Models
 	 */
 
-	class Adherents extends utilisateur 
+	class Adherents extends Utilisateur 
 	{
 
 		private $prenom;
@@ -80,9 +80,9 @@
 
 
 				// encapsulation
-				Adherent A = new Adherent($id, $tel, $mail, $adresse, $actif, $nom, $prenom);
+				Adherent $A = new Adherent($id, $tel, $mail, $adresse, $actif, $nom, $prenom);
 
-				return A;
+				return $A;
 
 			}
 			catch(Exception $e)
