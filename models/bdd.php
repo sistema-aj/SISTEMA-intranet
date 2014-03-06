@@ -21,7 +21,7 @@
 			}
 			catch(Exception $e)
 			{
-				return $e;
+				echo "Failed: " . $e->getMessage();
 			}
 		}
 		public static function getById($table, $id) 
@@ -35,7 +35,7 @@
 			}
 			catch(Exception $e)
 			{
-				return $e;
+				echo "Failed: " . $e->getMessage();
 			}
 		}
 
@@ -53,7 +53,7 @@
 			}
 			catch(Exception $e)
 			{
-				return $e;
+				echo "Failed: " . $e->getMessage();
 			}
 		}
 
@@ -72,7 +72,7 @@
 			}
 			catch(Exception $e)
 			{
-				return $e;
+				echo "Failed: " . $e->getMessage();
 			}
 		}
 
@@ -88,7 +88,7 @@
 			}
 			catch(Exception $e)
 			{
-				return $e;
+				echo "Failed: " . $e->getMessage();
 			}
 		}
 	}

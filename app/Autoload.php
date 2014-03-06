@@ -4,7 +4,8 @@
 		foreach ($arr as $elt) {
 			$filename = $elt.$classname.'.php';
 			
-			if(file_exists($filename)) {			
+			if(file_exists($filename)) 
+			{			
 				include_once($filename);
 				return;
 			}
