@@ -3,28 +3,27 @@
 	/**
 	 * @package Models
 	 */
-	class Projets {
+	class Projets 
+	{
 
-		/**
-		 * récupère la liste des projets du client
-		 * @author  
-		 * @param   type $idClient 
-		 * @return  type array 		liste des identifiants des projets
-		 * @version 0
-		 */
-		public static function getProjetParClient($idClient) {
+		private $titre;
+		private $description;
+		private $type;
+		private $archive;
+		private $idClient;
 
-		}
+		private function __construct($titre, $description, $type, $archive) 
+		{
+			$this->titre 		= $titre;
+			$this->description 	= $description;
+			$this->type 		= $type;
+			$this->archive 		= $archive;
+		};
 
-		/**
-		 * récupère les informations d'un projet et retourne un objet "projet" correspondant
-		 * 
-		 * @author 
-		 * @param  type $idProjet 
-		 * @return type
-		 */
-		public static function getDetailProjet($idProjet) {
 
-		}
+		
 	}
 ?>
+
+
+
