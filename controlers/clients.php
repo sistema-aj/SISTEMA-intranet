@@ -5,10 +5,26 @@
 
 	switch ($_SESSION['user_type']) {
 		case 'A':
-			ViewManager::displayViews(array("aMenu", "aSubMenu"));
+			if(isset($_REQUEST["action"])) {
+				switch ($_REQUEST["action"]) {
+					case 'liste':
+						$data->clients = ClientsDataLayer::getClients();
+						ViewManager::displayViews(array("aMenu", "aSubMenu", "aCliListe"));
+						break;
+					case 'ajout':
+						ViewManager::displayViews(array("aMenu", "aSubMenu", "aCliAjout"));
+						break;
+					default:
+						ViewManager::displayViews(array("aMenu", "aSubMenu", "404"));
+						break;
+				}
+			} else {
+				$data->clients = ClientsDataLayer::getClients();
+				ViewManager::displayViews(array("aMenu", "aSubMenu", "aCliListe"));
+			}
 			break;
 		default:
-			# code...
+			ViewManager::displayViews(array("404"));
 			break;	
 	}
 

@@ -2,8 +2,6 @@
 	ViewManager::setActiveCss(array('general'));
 
 	ViewManager::displayHeader();
-	Adherents::getDetailAdherent(8);
-	exit;
 
 	switch ($_SESSION['user_type']) {
 		case 'A':
