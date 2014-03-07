@@ -41,7 +41,7 @@
 			}
 			catch(Exception $e)
 			{
-				return $e;
+				echo "Failed: " . $e->getMessage();
 			}
 		}
 
@@ -65,7 +65,7 @@
 			}
 			catch(Exception $e)
 			{
-				return $e;
+				echo "Failed: " . $e->getMessage();
 			}
 		}
 
@@ -92,7 +92,7 @@
 			}
 			catch(Exception $e)
 			{
-				return $e;
+				echo "Failed: " . $e->getMessage();
 			}
 		}
 
@@ -121,7 +121,7 @@
 			}
 			catch(Exception $e)
 			{
-				return $e;
+				echo "Failed: " . $e->getMessage();
 			}
 		}
 
@@ -192,7 +192,7 @@
 			}
 			catch(Exception $e)
 			{
-				return $e;
+				echo "Failed: " . $e->getMessage();
 			}
 		}
 	}
