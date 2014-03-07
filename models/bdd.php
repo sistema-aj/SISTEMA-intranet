@@ -6,7 +6,7 @@
 	 */
 	class bdd {
 	/* PRIVATE CLASS ATTRIBUTES */
-		private static $_pdo;
+		public static $_pdo;
 		
 	/* STATIC METHODS */
 

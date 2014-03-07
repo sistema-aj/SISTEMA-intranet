@@ -1,59 +1,40 @@
 <?php
 
+	/**
+	 * @package Models
+	 * @var     $id
+	 * @var 	$tel
+	 * @var     $mail
+	 * @var     $adresse
+	 * @var 	$codePostal
+	 * @var 	$ville
+	 * @var     $actif
+	 */
 	class Utilisateur	
 	{
-
-		protected $identifiant;
+		protected $id;
 		protected $tel;
 		protected $mail;
 		protected $adresse;
+		protected $codePostal;
+		protected $ville;
 		protected $actif;
-
 
 		/**
 		 * Constructeur d'Utilisateur
 		 * 
 		 * @author 	 Guemas Anthony
-		 * @version  1
+		 * @version  1.1.0
 		 */
-		public Utilisateur($identifiant, $tel, $mail, $adresse, $actif)
+		public __construct($id, $tel, $mail, $adresse, $codePostal, $ville, $actif)
 		{
-			this.$identifiant = $identifiant;
-			this.$tel		  = $tel;
-			this.$mail 		  = $mail;
-			this.$adresse	  = $adresse;
-			this.$actif 	  = $actif;
+			$this->id 		= $id;
+			$this->tel		= $tel;
+			$this->mail 	= $mail;
+			$this->adresse  = $adresse;
+			$this->codePostal = $codePostal;
+			$this->ville 	= $ville;
+			$this->actif 	= $actif;
 		}
-
-		/**
-		 * Retourne un objet de type de l'utilisateur, instancié a partir des informations obtenues grace à l'identifiant.
-		 * 
-		 * @author  Guemas Anthony
-		 * @param   String $idUtilisateur 
-		 * @param   Char $type    A = admin/ E = adherent/ C = client
-		 * @return  Utilisateur
-		 * @version 0
-		 */
-		public function getUtilisateur($idUtilisateur, $type)  
-		{
-				switch($type)
-				{
-					case 'A' : return Administrateur::getAdministrateur($idUtilisateur);
-					break;
-
-					case 'E' : return Adherent::getAdherent($idUtilisateur);
-					break;
-
-					case 'C' : return Client::getClient($idUtilisateur);
-					break;
-
-					default : return 0;
-					break;
-				}
-		}
-
 	}
-
-
-
 ?>
