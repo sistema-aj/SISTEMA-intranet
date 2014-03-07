@@ -7,7 +7,7 @@
 		<th>Mail</th>
 		<th>CV</th>
 	</tr>
-	<?php foreach ($data->activeUser as $user) { ?>
+	<?php foreach ($data->adherents as $user) { ?>
 	<tr>
 		<td><?php echo $user->nom; ?></td>
 		<td><?php echo $user->prenom; ?></td>

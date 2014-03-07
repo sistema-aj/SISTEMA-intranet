@@ -8,15 +8,15 @@
 			if(isset($_REQUEST["action"])) {
 				switch ($_REQUEST["action"]) {
 					case 'liste':
-						$data->activeUser = bdd::getActiveAdh();
+						$data->adherents = AdherentsDataLayer::getAdherents();
 						ViewManager::displayViews(array("aMenu", "aSubMenu", "aAdhListe"));
 						break;
 					case 'adhesions':
-						$data->inactiveUser = bdd::getInactiveAdh();
+						$data->candidats = Administration::getCandidats();
 						ViewManager::displayViews(array("aMenu", "aSubMenu", "aAdhAdhesions"));
 						break;
 					case 'adhesions-projets':
-						$data->adhesionsPro = bdd::getAdhesionsPro();
+						$data->adhesions = bdd::getAdhesionsPro();
 						ViewManager::displayViews(array("aMenu", "aSubMenu", "aAdhProjets"));
 						break;
 					default:
@@ -24,7 +24,7 @@
 						break;
 				}
 			} else {
-				$data->activeUser = bdd::getActiveAdh();
+				$data->adherents = AdherentsDataLayer::getAdherents();
 				ViewManager::displayViews(array("aMenu", "aSubMenu", "aAdhListe"));
 			}
 			break;

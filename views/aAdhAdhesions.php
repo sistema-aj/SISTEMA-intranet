@@ -8,7 +8,7 @@
 		<th>CV</th>
 		<th>Validation</th>
 	</tr>
-	<?php foreach ($data->inactiveUser as $user) { ?>
+	<?php foreach ($data->candidats as $user) { ?>
 	<tr>
 		<td><?php echo $user->nom; ?></td>
 		<td><?php echo $user->prenom; ?></td>

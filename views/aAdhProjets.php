@@ -9,7 +9,7 @@
 		<th>CV</th>
 		<th>Validation</th>
 	</tr>
-	<?php foreach ($data->adhesionsPro as $user) { ?>
+	<?php foreach ($data->adhesions as $user) { ?>
 	<tr>
 		<td><?php echo $user->nom; ?></td>
 		<td><?php echo $user->prenom; ?></td>
