@@ -48,7 +48,7 @@
 				bdd::init();
 				bdd::$_pdo->beginTransaction();
 				$result = bdd::$_pdo->prepare('INSERT INTO utilisateur (`telephone`, `mail`, `adresse`, `codePostal`, `ville`, `actif`) 
-											VALUES(:telephone,:mail,:adresse,:codePostal,:ville,0)');
+											VALUES(:telephone,:mail,:adresse,:codePostal,:ville,1)');
 				$result->bindParam(":telephone",$telephone,PDO::PARAM_STR);
 				$result->bindParam(":mail",$mail,PDO::PARAM_STR);
 				$result->bindParam(":adresse",$adresse,PDO::PARAM_STR);
@@ -70,16 +70,16 @@
 				$result->closeCursor();
 				
 				//deuxième partie : création/génération des logins utilisateur pour le profil client associé
-				$logins = genererLogins('client',$lastIdInserted);
+				$logins = self::genererLogin('client',array($raisonSociale));
 				$login = $logins['login'];
 				$mdp = $logins['mdp'];
-				$mdpCrypter = hash_password($mdp);
+				$mdpCrypter = self::hash_password($mdp);
 
 				$insertLogin = bdd::$_pdo->prepare("INSERT INTO login (`login`, `mdp`, `type`, `user`)
 											VALUES(:login,:mdp,'C',:idClient)");
-				$insertLogin->bindParam(":login",$login,PARAM_STR);
-				$insertLogin->bindParam(":mdp",$mdpCrypter,PARAM_STR);
-				$insertLogin->bindParam(":idClient",$lastIdInserted,PARAM_INT);
+				$insertLogin->bindParam(":login",$login,PDO::PARAM_STR);
+				$insertLogin->bindParam(":mdp",$mdpCrypter,PDO::PARAM_STR);
+				$insertLogin->bindParam(":idClient",$lastIdInserted,PDO::PARAM_INT);
 				$insertLogin->execute();
 				bdd::$_pdo->commit();
 
@@ -140,17 +140,16 @@
 			}
 		}
 			
-		public static function genererLogin($userType, $idUser)
+		public static function genererLogin($userType, $data)
 		{//TODO à tester ...
 			
 			switch($userType)
 			{
 				case 'candidat':
 					try
-					{					
-						bdd::init();
+					{
 						$result = bdd::$_pdo->prepare('SELECT nom, prenom FROM adherent where id = :idUser');
-						$result->bindParam("idUser",$idUser,PARAM_INT);
+						$result->bindParam(":idUser",$idUser,PDO::PARAM_INT);
 						$result->execute();
 						$result = $result->fetch();
 						$login = strtolower($result->prenom.$result->nom);
@@ -165,19 +164,15 @@
 				case 'client':
 					try
 					{
-						bdd::init();
-						$result = bdd::$_pdo->prepare('SELECT RaisonSociale FROM client where id = :idUser');
-						$result->bindParam("idUser",$idUser,PARAM_INT);
-						$result->execute();
-						$result = $result->fetch();
-						$login = strtolower($result->raisonSociale);
+						var_dump($data);
+						$login = strtolower($data[0]);
 						$login = str_replace(CHR(32),"",$login);
 						$login = preg_replace("#[^a-zA-Z]#", "", $login);
 						if(strlen($login) > 10)
 						{
 							$login =  substr($login,0,10);
 						}
-						$mdp = genererMDP(10);
+						$mdp = self::genererMDP(10);
 						$logins = ["login" => $login, "mdp" => $mdp];
 					}
 					catch(Exception $e)
@@ -278,9 +273,9 @@
 				bdd::$_pdo->beginTransaction();
 				$result = bdd::$_pdo->prepare("INSERT INTO login (`login`, `mdp`, `type`, `user`) 
 											VALUES(:login,:mdp,'E',:idCandidat)");
-				$result->bindParam(":login",$login,PARAM_STR);
-				$result->bindParam(":mdp",$mdpCrypter,PARAM_STR);
-				$result->bindParam("idCandidat",$idCandidat,PARAM_INT);
+				$result->bindParam(":login",$login,PDO::PARAM_STR);
+				$result->bindParam(":mdp",$mdpCrypter,PDO::PARAM_STR);
+				$result->bindParam("idCandidat",$idCandidat,PDO::PARAM_INT);
 				$result->execute();
 				bdd::$_pdo->commit();
 				
