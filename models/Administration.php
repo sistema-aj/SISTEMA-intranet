@@ -16,10 +16,12 @@
 				$result->bindParam(":codePostal",$codePostal,PDO::PARAM_STR);
 				$result->bindParam(":ville",$Ville,PDO::PARAM_STR);
 				$result->execute();
+				$result->closeCursor();
 
-				$lastIdInserted = bdd::$_pdo->query('SELECT MAX(id) FROM utilisateur');
+				$lastIdInserted = bdd::$_pdo->query('SELECT MAX(id) as max FROM utilisateur');
 				$lastIdInserted->setFetchMode(PDO::FETCH_OBJ);
 				$lastIdInserted = $lastIdInserted->fetch();
+				$lastIdInserted = $lastIdInserted->max;
 				
 				$result = bdd::$_pdo->prepare('INSERT INTO adherent (`id`, `nom`, `prenom`,`promo`)
 											VALUES(:id,:nom,:prenom,:promo)');
@@ -28,6 +30,7 @@
 				$result->bindParam(":prenom",$prenom,PDO::PARAM_STR);
 				$result->bindParam(":promo",$promo,PDO::PARAM_STR);
 				$result->execute();
+				$result->closeCursor();
 				bdd::$_pdo->commit();
 			}
 			catch (Exception $e) 
@@ -37,7 +40,7 @@
 			}
 		}
 		
-		public static function creerClient($raisonSociale,$mailClient,$telephone,$adresse,$codePostal,$Ville)
+		public static function creerClient($raisonSociale,$telephone,$mail,$adresse,$codePostal,$ville)
 		{
 			try
 			{
@@ -50,18 +53,21 @@
 				$result->bindParam(":mail",$mail,PDO::PARAM_STR);
 				$result->bindParam(":adresse",$adresse,PDO::PARAM_STR);
 				$result->bindParam(":codePostal",$codePostal,PDO::PARAM_STR);
-				$result->bindParam(":ville",$Ville,PDO::PARAM_STR);
+				$result->bindParam(":ville",$ville,PDO::PARAM_STR);
 				$result->execute();
+				$result->closeCursor();
 
-				$lastIdInserted = bdd::$_pdo->query('SELECT MAX(id) FROM utilisateur');
+				$lastIdInserted = bdd::$_pdo->query('SELECT MAX(id) as max FROM utilisateur');
 				$lastIdInserted->setFetchMode(PDO::FETCH_OBJ);
 				$lastIdInserted = $lastIdInserted->fetch();
+				$lastIdInserted = $lastIdInserted->max;
 
 				$result = bdd::$_pdo->prepare('INSERT INTO client (`id`, `raisonSociale`)
 											VALUES (:id, :raisonSociale)');
 				$result->bindParam(":id",$lastIdInserted,PDO::PARAM_INT);
 				$result->bindParam(":raisonSociale",$raisonSociale,PDO::PARAM_STR);
 				$result->execute();
+				$result->closeCursor();
 				
 				//deuxième partie : création/génération des logins utilisateur pour le profil client associé
 				$logins = genererLogins('client',$lastIdInserted);
@@ -69,12 +75,12 @@
 				$mdp = $logins['mdp'];
 				$mdpCrypter = hash_password($mdp);
 
-				$result = bdd::$_pdo->prepare("INSERT INTO login (`login`, `mdp`, `type`, `user`)
+				$insertLogin = bdd::$_pdo->prepare("INSERT INTO login (`login`, `mdp`, `type`, `user`)
 											VALUES(:login,:mdp,'C',:idClient)");
-				$result->bindParam(":login",$login,PARAM_STR);
-				$result->bindParam(":mdp",$mdpCrypter,PARAM_STR);
-				$result->bindParam(":idClient",$lastIdInserted,PARAM_INT);
-				$result->execute();
+				$insertLogin->bindParam(":login",$login,PARAM_STR);
+				$insertLogin->bindParam(":mdp",$mdpCrypter,PARAM_STR);
+				$insertLogin->bindParam(":idClient",$lastIdInserted,PARAM_INT);
+				$insertLogin->execute();
 				bdd::$_pdo->commit();
 
 				// Préparation du mail contenant les logins
@@ -100,6 +106,20 @@
 			{
 			  bdd::$_pdo->rollBack();
 			  echo "Failed: " . $e->getMessage();
+			}
+		}
+
+		public static function checkClientParams($data) {
+			if(isset($_REQUEST['raisonSociale']) && isset($_REQUEST['telephone']) && isset($_REQUEST['mail'])
+				&& isset($_REQUEST['adresse']) && isset($_REQUEST['codePostal']) && isset($_REQUEST['ville']))
+			{
+				if($_REQUEST['raisonSociale'] != "" && $_REQUEST['telephone'] != "" && $_REQUEST['mail'] != ""
+					&& $_REQUEST['adresse'] != "" && $_REQUEST['codePostal'] != "" && $_REQUEST['ville'] != "") 
+				{
+					return true;	
+				} else {
+					return false;
+				}
 			}
 		}
 
