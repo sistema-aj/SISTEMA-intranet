@@ -164,7 +164,6 @@
 				case 'client':
 					try
 					{
-						var_dump($data);
 						$login = strtolower($data[0]);
 						$login = str_replace(CHR(32),"",$login);
 						$login = preg_replace("#[^a-zA-Z]#", "", $login);
