@@ -9,7 +9,7 @@
 		public static function load() {
 			$data = self::$_data;
 			// redirect to appropriate controler
-			if(isset($_SESSION['user_id']))
+			if(isset($_SESSION['user_id']) || $_REQUEST["page"] == "inscription")
 				$controler = ($_REQUEST["page"] == "") ? "home" : $_REQUEST["page"];			
 			else
 				$controler = "connexion";
