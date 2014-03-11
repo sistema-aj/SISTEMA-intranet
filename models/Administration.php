@@ -56,7 +56,7 @@
 				&& $data['mail'] != "" && $data['adresse'] != "" && $data['codePostal'] != ""
 				&& $data['ville'] != "") 
 			{
-				$error = "";
+				/*$error = "";
 				// Vérification pour le nom et formattage de la variable.
 				if (preg_match("/^[a-zA-Z][a-zA-Z\-]+[a-zA-Z]$/", $data['nom']))
 					$data['nom'] = ucfirst(strtolower($data['nom']));
@@ -70,8 +70,7 @@
 					$error += "Le prenom doit être une chaine de caractères.<br/>"
 				}
 
-				throw new Exception($error);
-
+				throw new Exception($error);*/
 				return true;	
 			} else {
 				return false;

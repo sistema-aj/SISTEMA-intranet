@@ -14,7 +14,7 @@
 		 * @return  array liste des projets sous forme d'array
 		 * @version 1
 		 */
-		public function getProjetParClient($idClient) 
+		public static function getProjetParClient($idClient) 
 		{
 			try
 			{
@@ -22,10 +22,10 @@
 				$result = bdd::$_pdo->prepare(" SELECT titre, description, type, status
 												FROM projet JOIN client ON client.id = projet.client 
 												AND projet.client = :id");
-
 				$result->bindParam(":id", $idClient, PDO::PARAM_INT);
+				$result->execute();
+				$result->setFetchMode(PDO::FETCH_OBJ);
 				$result = $result->fetchAll();
-
 				return $result;
 			}
 			catch(Exception $e)
@@ -42,7 +42,7 @@
 		 * @return  projet 
 		 * @version 1
 		 */
-		public function getDetailProjet($idProjet) 
+		public static function getDetailProjet($idProjet) 
 		{
 			try
 			{
@@ -53,6 +53,8 @@
 											  );
 
 				$result->bindParam(":id", $idClient, PDO::PARAM_INT);
+				$result->execute();
+				$result->setFetchMode(PDO::FETCH_OBJ);
 				$result = $result->fetch();
 
 				$titre		 = $result->titre;
@@ -61,7 +63,7 @@
 				$archive 	 = $result->archive;
 
 				// encapsulation
-				Projets $p = new Projets($titre, $description, $type, $archive);
+				$p = new Projets($titre, $description, $type, $archive);
 
 				return $p;
 			}
@@ -79,20 +81,19 @@
 		 * @return  Array
 		 * @version 1
 		 */
-		public function getProjetsNonAffectes($critereTri)
+		public static function getProjetsNonAffectes($critereTri)
 		{
 			try
 			{
 				// recuperation des informations
-				$result = bdd::$_pdo->prepare(" SELECT   titre, description, type, status
-												FROM     projet
-												WHERE 	 status = 'N'
-												ORDER BY :tri	
-											 ");
-
+				$result = bdd::$_pdo->prepare(" SELECT titre, description, type, status
+												FROM projet
+												WHERE status = 'N'
+												ORDER BY :tri");
 				$result->bindParam(":tri", $critereTri, PDO::PARAM_INT);
+				$result->execute();
+				$result->setFetchMode(PDO::FETCH_OBJ);
 				$result = $result->fetchAll();
-
 				return $result;
 			}
 			catch(Exception $e)
@@ -109,20 +110,19 @@
 		 * @return  Array
 		 * @version 1
 		 */
-		public function getProjetsActifsTermines($critereTri)
+		public static function getProjetsActifsTermines($critereTri)
 		{
 			try
 			{
 				// recuperation des informations
 				$result = bdd::$_pdo->prepare(" SELECT DISTINCT  id, titre, description, type, status
-												FROM             projet 
-												WHERE 	         status NOT IN ('N')
-												ORDER BY         :tri
-											 ");
-
+												FROM projet 
+												WHERE status NOT IN ('N')
+												ORDER BY :tri");
 				$result->bindParam(":tri", $critereTri, PDO::PARAM_INT);
+				$result->execute();
+				$result->setFetchMode(PDO::FETCH_OBJ);
 				$result = $result->fetchAll();
-
 				return $result;
 			}
 			catch(Exception $e)
@@ -138,7 +138,7 @@
 		 * @param   projet $projet 	objet de type projet devant etre entré en base 
 		 * @version 1
 		 */
-		public function CreerProjet($projet)
+		public static function CreerProjet($projet)
 		{
 
 			try
@@ -150,9 +150,8 @@
 				$client 	 = $projet->client;
 
 				// recuperation des informations
-					$insert = bdd::$_pdo->prepare(" INSERT INTO  projet( titre,  description,  type,  status,  client)
-													VALUES 		       (:titre, :description, :type, :status, :client)
-												 ");
+				$insert = bdd::$_pdo->prepare(" INSERT INTO  projet( titre,  description,  type,  status,  client)
+												VALUES (:titre, :description, :type, :status, :client)");
 
 				$insert->execute( 
 									array(
@@ -177,19 +176,18 @@
 		 * @return 	array 	Liste d'adherents 
 		 * @version 0
 		 */
-		public function getAdhesions()
+		public static function getAdhesions()
 		{
 			try
 			{
 				// recuperation des informations
-				$result = bdd::$_pdo->prepare(" SELECT   telephone, mail, adresse, codePostal, ville, actif, nom, prenom, promo
-												FROM     utilisateur JOIN adherent   ON utilisateur.id = adherent.id
-																	 JOIN participer ON adherent.id = participer.user 
-												WHERE 	 participer.status = 'A'	
-											 ");
-
+				$result = bdd::$_pdo->query(" SELECT utilisateur.id, titre, telephone, mail, adresse, codePostal, ville, actif, nom, prenom, promo
+											FROM utilisateur JOIN adherent ON utilisateur.id = adherent.id
+											JOIN participer ON adherent.id = participer.user
+											JOIN projet ON projet.id = participer.projet
+											WHERE participer.status = 'A'");
+				$result->setFetchMode(PDO::FETCH_OBJ);
 				$result = $result->fetchAll();
-
 				return $result;
 			}
 			catch(Exception $e)
@@ -205,7 +203,7 @@
 		 * @param   projet $projet 	objet de type projet dont on veut obtenir la liste des demandes 
 		 * @version 0
 		 */
-		public function getAdhesionsParProjet($projet)
+		public static function getAdhesionsParProjet($projet)
 		{
 			try
 			{
@@ -217,8 +215,9 @@
 												AND 	 participer.projet = :id	
 											 ");
 				$result->bindParam(":id", $projet->id, PDO::PARAM_INT);
+				$result->execute();
+				$result->setFetchMode(PDO::FETCH_OBJ);
 				$result = $result->fetchAll();
-
 				return $result;
 			}
 			catch(Exception $e)

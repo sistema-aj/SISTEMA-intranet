@@ -24,15 +24,15 @@
 						ViewManager::displayViews(array("aMenu", "aSubMenu", "aAdhAdhesions"));
 						break;
 					case 'adhesions-projets':
-						$data->adhesions = bdd::getAdhesionsPro();
+						$data->adhesions = ProjetsDataLayer::getAdhesions();
 						ViewManager::displayViews(array("aMenu", "aSubMenu", "aAdhProjets"));
 						break;
 					case 'valider-candidatPro':
-						$data->adhesions = bdd::getAdhesionsPro();
+						$data->adhesions = ProjetsDataLayer::getAdhesions();
 						ViewManager::displayViews(array("aMenu", "aSubMenu", "aAdhProjets"));
 						break;
 					case 'refuser-candidatPro':
-						$data->adhesions = bdd::getAdhesionsPro();
+						$data->adhesions = ProjetsDataLayer::getAdhesions();
 						ViewManager::displayViews(array("aMenu", "aSubMenu", "aAdhProjets"));
 						break;
 					default:
