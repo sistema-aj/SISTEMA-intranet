@@ -222,9 +222,9 @@ CREATE TABLE IF NOT EXISTS `participer` (
 -- Contenu de la table `participer`
 --
 
-INSERT INTO `participer` (`user`, `projet`,  `chefProjet `,  `status `) VALUES
+INSERT INTO `participer` (`user`, `projet`,  `chefProjet`,  `status`) VALUES
 (8, 1, 0, 'A'),
-(9, 1, 0, 'A');
+(9, 1, 0, 'A'),
 (7, 1, 1, 'O');
 
 -- --------------------------------------------------------
