@@ -12,5 +12,6 @@
 				<?php echo $data->error; ?>
 			</span>
 		<?php } ?>
+		<p>Pas encore adhérent ? <a href="<?php echo URL_ROOT; ?>inscription">Inscription</a></p>
 	</div>
 </div>

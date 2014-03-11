@@ -21,8 +21,14 @@
 			<a href=""><img src="file.png"/></a>
 		</td>
 		<td>
-			<a href=""><img src="check-mark.png"/></a>
-			<a href=""><img src="x-mark.png"/></a>
+			<form action="<?php echo URL_ROOT; ?>adherents/valider-candidatPro" style="display:inline-block" method="POST">
+				<input type="hidden" name="id" value="<?php echo $user->id; ?>" />
+				<a href="#" onclick="this.parentNode.submit()"><img src="check-mark.png"/></a>
+			</form>
+			<form action="<?php echo URL_ROOT; ?>adherents/refuser-candidatPro" style="display:inline-block" method="POST">
+				<input type="hidden" name="id" value="<?php echo $user->id; ?>" />
+				<a href="#" onclick="this.parentNode.submit()"><img src="x-mark.png"/></a>
+			</form>
 		</td>
 	</tr>
 	<?php } ?>

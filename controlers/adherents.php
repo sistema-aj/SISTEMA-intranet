@@ -15,7 +15,23 @@
 						$data->candidats = Administration::getCandidats();
 						ViewManager::displayViews(array("aMenu", "aSubMenu", "aAdhAdhesions"));
 						break;
+					case 'valider-candidat':
+						$data->candidats = Administration::getCandidats();
+						ViewManager::displayViews(array("aMenu", "aSubMenu", "aAdhAdhesions"));
+						break;
+					case 'refuser-candidat':
+						$data->candidats = Administration::getCandidats();
+						ViewManager::displayViews(array("aMenu", "aSubMenu", "aAdhAdhesions"));
+						break;
 					case 'adhesions-projets':
+						$data->adhesions = bdd::getAdhesionsPro();
+						ViewManager::displayViews(array("aMenu", "aSubMenu", "aAdhProjets"));
+						break;
+					case 'valider-candidatPro':
+						$data->adhesions = bdd::getAdhesionsPro();
+						ViewManager::displayViews(array("aMenu", "aSubMenu", "aAdhProjets"));
+						break;
+					case 'refuser-candidatPro':
 						$data->adhesions = bdd::getAdhesionsPro();
 						ViewManager::displayViews(array("aMenu", "aSubMenu", "aAdhProjets"));
 						break;

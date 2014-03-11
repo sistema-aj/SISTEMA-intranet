@@ -2,7 +2,7 @@
 	class Administration 
 	{
 	
-		public static function creerCandidat($nom,$prenom,$mail,$telephone,$adresse,$codePostal,$Ville,$promo) 
+		public static function creerCandidat($nom,$prenom,$mail,$telephone,$adresse,$codePostal,$ville,$promo) 
 		{
 			try
 			{
@@ -12,9 +12,9 @@
 											VALUES(:telephone,:mail,:adresse,:codePostal,:ville,0)');
 				$result->bindParam(":telephone",$telephone,PDO::PARAM_STR);
 				$result->bindParam(":mail",$mail,PDO::PARAM_STR);
-				$result->bindParam(":adresse",$adresse,PDO::PARAM_ST);
+				$result->bindParam(":adresse",$adresse,PDO::PARAM_STR);
 				$result->bindParam(":codePostal",$codePostal,PDO::PARAM_STR);
-				$result->bindParam(":ville",$Ville,PDO::PARAM_STR);
+				$result->bindParam(":ville",$ville,PDO::PARAM_STR);
 				$result->execute();
 				$result->closeCursor();
 
@@ -36,7 +36,45 @@
 			catch (Exception $e) 
 			{
 			  bdd::$_pdo->rollBack();
-			  echo "Failed: " . $e->getMessage();
+			  throw new Exception($e->getCode());
+			}
+		}
+
+		public static function issetCandidatParams($data) {
+			if(isset($data['nom']) && isset($data['prenom']) && isset($data['telephone'])
+				&& isset($data['mail']) && isset($data['adresse']) && isset($data['codePostal'])
+				&& isset($data['ville']) && isset($data['promo']))
+			{
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public static function checkCandidatParams(&$data) {
+			if($data['nom'] != "" && $data['prenom'] != "" && $data['telephone'] != ""
+				&& $data['mail'] != "" && $data['adresse'] != "" && $data['codePostal'] != ""
+				&& $data['ville'] != "") 
+			{
+				$error = "";
+				// Vérification pour le nom et formattage de la variable.
+				if (preg_match("/^[a-zA-Z][a-zA-Z\-]+[a-zA-Z]$/", $data['nom']))
+					$data['nom'] = ucfirst(strtolower($data['nom']));
+				else {
+					$error += "Le nom doit être une chaine de caractères.<br/>"
+				}
+				// Vérification pour le nom et formattage de la variable.
+				if (preg_match("/^[a-zA-Z][a-zA-Z\-]+[a-zA-Z]$/", $data['prenom']))
+					$data['prenom'] = ucfirst(strtolower($data['prenom']));
+				else {
+					$error += "Le prenom doit être une chaine de caractères.<br/>"
+				}
+
+				throw new Exception($error);
+
+				return true;	
+			} else {
+				return false;
 			}
 		}
 		
@@ -127,7 +165,7 @@
 		{
 			try
 			{
-				$result = bdd::$_pdo->query("SELECT nom, prenom, promo, telephone, mail 
+				$result = bdd::$_pdo->query("SELECT utilisateur.id, nom, prenom, promo, telephone, mail 
 								FROM utilisateur JOIN adherent ON utilisateur.id = adherent.id 
 								WHERE actif = 0");
 				$result->setFetchMode(PDO::FETCH_OBJ);
