@@ -177,45 +177,50 @@
 			}
 		}
 			
-		public static function genererLogin($userType, $data)
+		public static function genererLogin($userType, $idUser)
 		{//TODO à tester ...
-			
 			switch($userType)
 			{
 				case 'candidat':
 					try
-					{
+					{	
+						bdd::init();
 						$result = bdd::$_pdo->prepare('SELECT nom, prenom FROM adherent where id = :idUser');
-						$result->bindParam(":idUser",$idUser,PDO::PARAM_INT);
+						$result->bindParam("idUser",$idUser,PDO::PARAM_INT);
 						$result->execute();
 						$result = $result->fetch();
-						$login = strtolower($result->prenom.$result->nom);
-						$mdp = genererMDP(10);
-						$logins = ["login" => $login, "mdp" => $mdp];
+						$login = strtolower($result['prenom'][0].$result['nom']);
+						$mdp = self::genererMDP();
+						$logins = ["login" => $login, "mdp" => $mdp,];
 					}
 					catch(Exception $e)
 					{
 						echo "Failed: " . $e->getMessage();
 					}
-				break;
+					break;
 				case 'client':
 					try
 					{
-						$login = strtolower($data[0]);
+						bdd::init();
+						$result = bdd::$_pdo->prepare('SELECT RaisonSociale FROM client where id = :idUser');
+						$result->bindParam("idUser",$idUser,PDO::PARAM_INT);
+						$result->execute();
+						$result = $result->fetch();
+						$login = strtolower($result['raisonSociale']);
 						$login = str_replace(CHR(32),"",$login);
 						$login = preg_replace("#[^a-zA-Z]#", "", $login);
 						if(strlen($login) > 10)
 						{
-							$login =  substr($login,0,10);
+							$login = substr($login,0,10);
 						}
-						$mdp = self::genererMDP(10);
-						$logins = ["login" => $login, "mdp" => $mdp];
+						$mdp = self::genererMDP();
+						$logins = ["login" => $login, "mdp" => $mdp,];
 					}
 					catch(Exception $e)
 					{
 						echo "Failed: " . $e->getMessage();
 					}
-				break;
+					break;
 			}
 			return $logins;
 		}
@@ -301,17 +306,23 @@
 		{
 			try
 			{
-				$logins = genererLogins('candidat',$idCandidat);
+				$logins = self::genererLogin('candidat',$idCandidat);
 				$login = $logins['login'];
 				$mdp = $logins['mdp'];
-				$mdpCrypter = hash_password($mdp);
+				$mdpCrypter = self::hash_password($mdp);
 
-				bdd::$_pdo->beginTransaction();
+				bdd::$_pdo->beginTransaction();	
+				// création des loginsç
 				$result = bdd::$_pdo->prepare("INSERT INTO login (`login`, `mdp`, `type`, `user`) 
 											VALUES(:login,:mdp,'E',:idCandidat)");
 				$result->bindParam(":login",$login,PDO::PARAM_STR);
 				$result->bindParam(":mdp",$mdpCrypter,PDO::PARAM_STR);
 				$result->bindParam("idCandidat",$idCandidat,PDO::PARAM_INT);
+				$result->execute();
+				// activation de l'utilisateur
+				$result = bdd::$_pdo->prepare("UPDATE utilisateur SET actif = 1
+											WHERE id = :id");
+				$result->bindParam(":id",$idCandidat,PDO::PARAM_INT);
 				$result->execute();
 				bdd::$_pdo->commit();
 				
@@ -342,12 +353,91 @@
 			}	
 		}
 
-		public static function affecterAuProjet($idAdherent) 
+		public static function refusCandidat($id, $mail)
+		{
+			try
+			{
+				bdd::$_pdo->beginTransaction();	
+				// suppression du candidat
+				$result = bdd::$_pdo->prepare("DELETE FROM adherent
+											WHERE id = :id");
+				$result->bindParam(":id",$id,PDO::PARAM_INT);
+				$result->execute();
+				// activation de l'utilisateur
+				$result = bdd::$_pdo->prepare("DELETE FROM utilisateur
+											WHERE id = :id");
+				$result->bindParam(":id",$id,PDO::PARAM_INT);
+				$result->execute();
+				bdd::$_pdo->commit();
+				
+				// Préparation du mail contenant les logins
+					$sujet = "Candidature SISTEMA" ;
+					$entete = "From: sistema@noreply.com" ;
+        
+				// coeur du message du mail
+					$message = 'Bonjour,
+
+					Nous vous informons que votre candidature a été refusée par la direction de SISTEMA.
+					Cependant, ceci ne remet pas en cause la qualité de votre profil.
+
+					Cordialement,
+					La direction de SISTEMA.
+
+					---------------
+					Ceci est un mail automatique, Merci de ne pas y répondre.';
+        
+				//mail($mailCandidat, $sujet, $message, $entete); //envoi le mail 
+			}
+			catch(Exception $e)
+			{
+				bdd::$_pdo->rollBack();
+				echo "Failed: " . $e->getMessage();
+			}
+		}
+
+		public static function accepterCandidatureProjet($idAdh, $idPro)
+		{
+			try {
+				bdd::$_pdo->beginTransaction();
+				$result = bdd::$_pdo->prepare("UPDATE participer SET status = 'O' 
+											WHERE user = :user AND projet = :projet");
+				$result->bindParam(':user',$idAdh,PDO::PARAM_INT);
+				$result->bindParam(':projet',$idPro,PDO::PARAM_INT);
+				$result->execute();
+				bdd::$_pdo->commit();
+			} catch (Exception $e) {
+				bdd::$_pdo->rollBack();
+				throw new Exception("Erreur lors de l'acceptation du candidat sur le projet.");
+			}
+		}
+
+		public static function refuserCandidatureProjet($idAdh, $idPro)
+		{
+			try {
+				bdd::$_pdo->beginTransaction();
+				$result = bdd::$_pdo->prepare("UPDATE participer SET status = 'R' 
+											WHERE user = :user AND projet = :projet");
+				$result->bindParam(':user',$idAdh,PDO::PARAM_INT);
+				$result->bindParam(':projet',$idPro,PDO::PARAM_INT);
+				$result->execute();
+				bdd::$_pdo->commit();
+			} catch (Exception $e) {
+				bdd::$_pdo->rollBack();
+				throw new Exception("Erreur lors du refus du candidat sur le projet.");
+			}	
+		}
+
+		public static function affecterAuProjet($idAdh, $idPro) 
 		{
 
 		}
 
-		public static function nommerChefProjet($idAdherent) 
+		public static function detacherDuProjet($idAdh, $idPro)
+		{
+
+		}
+
+		public static function nommerChefProjet($idAdh, $idPro) 
 		{
 
 		}

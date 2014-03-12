@@ -15,8 +15,16 @@
 		<td><?php echo $user->telephone; ?></td>
 		<td><?php echo $user->mail; ?></td>
 		<td>
-			<a href=""><img src="check-mark.png"/></a>
-			<a href=""><img src="x-mark.png"/></a>
+			<form action="<?php echo URL_ROOT; ?>candidatures/valider-candidat" style="display:inline-block" method="POST">
+				<input type="hidden" name="id" value="<?php echo $user->id; ?>" />
+				<input type="hidden" name="mail" value="<?php echo $user->mail; ?>" />
+				<a href="#" onclick="this.parentNode.submit()"><img src="check-mark.png"/></a>
+			</form>
+			<form action="<?php echo URL_ROOT; ?>candidatures/refuser-candidat" style="display:inline-block" method="POST">
+				<input type="hidden" name="id" value="<?php echo $user->id; ?>" />
+				<input type="hidden" name="mail" value="<?php echo $user->mail; ?>" />
+				<a href="#" onclick="this.parentNode.submit()"><img src="x-mark.png"/></a>
+			</form>
 		</td>
 	</tr>
 	<?php } ?>
@@ -45,8 +53,16 @@
 			<a href=""><img src="file.png"/></a>
 		</td>
 		<td>
-			<a href=""><img src="check-mark.png"/></a>
-			<a href=""><img src="x-mark.png"/></a>
+			<form action="<?php echo URL_ROOT; ?>candidatures/valider-candidatPro" style="display:inline-block" method="POST">
+				<input type="hidden" name="id" value="<?php echo $user->id; ?>" />
+				<input type="hidden" name="projet" value="<?php echo $user->projet; ?>" />
+				<a href="#" onclick="this.parentNode.submit()"><img src="check-mark.png"/></a>
+			</form>
+			<form action="<?php echo URL_ROOT; ?>candidatures/refuser-candidatPro" style="display:inline-block" method="POST">
+				<input type="hidden" name="id" value="<?php echo $user->id; ?>" />
+				<input type="hidden" name="projet" value="<?php echo $user->projet; ?>" />
+				<a href="#" onclick="this.parentNode.submit()"><img src="x-mark.png"/></a>
+			</form>
 		</td>
 	</tr>
 	<?php } ?>

@@ -181,7 +181,8 @@
 			try
 			{
 				// recuperation des informations
-				$result = bdd::$_pdo->query(" SELECT utilisateur.id, titre, telephone, mail, adresse, codePostal, ville, actif, nom, prenom, promo
+				$result = bdd::$_pdo->query(" SELECT utilisateur.id, projet.id as projet, titre, telephone, mail,
+											adresse, codePostal, ville, actif, nom, prenom, promo
 											FROM utilisateur JOIN adherent ON utilisateur.id = adherent.id
 											JOIN participer ON adherent.id = participer.user
 											JOIN projet ON projet.id = participer.projet

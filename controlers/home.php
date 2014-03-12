@@ -5,7 +5,7 @@
 
 	switch ($_SESSION['user_type']) {
 		case 'A':
-			$data->candidats = bdd::getInactiveAdh();
+			$data->candidats = Administration::getCandidats();
 			$data->adhesionsPro = ProjetsDataLayer::getAdhesions();
 			ViewManager::displayViews(array("aMenu", "aSubMenu", "aHome"));
 			break;
