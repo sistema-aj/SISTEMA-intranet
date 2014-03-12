@@ -107,7 +107,7 @@
 				$result->closeCursor();
 				
 				//deuxième partie : création/génération des logins utilisateur pour le profil client associé
-				$logins = self::genererLogin('client',array($raisonSociale));
+				$logins = self::genererLogin('client',$lastIdInserted);
 				$login = $logins['login'];
 				$mdp = $logins['mdp'];
 				$mdpCrypter = self::hash_password($mdp);
@@ -183,15 +183,15 @@
 			{
 				case 'candidat':
 					try
-					{	
-						bdd::init();
+					{
 						$result = bdd::$_pdo->prepare('SELECT nom, prenom FROM adherent where id = :idUser');
 						$result->bindParam("idUser",$idUser,PDO::PARAM_INT);
 						$result->execute();
+						$result->setFetchMode(PDO::FETCH_OBJ);
 						$result = $result->fetch();
-						$login = strtolower($result['prenom'][0].$result['nom']);
+						$login = strtolower($result->prenom.$result->nom);
 						$mdp = self::genererMDP();
-						$logins = ["login" => $login, "mdp" => $mdp,];
+						$logins = ["login" => $login, "mdp" => $mdp];
 					}
 					catch(Exception $e)
 					{
@@ -201,12 +201,12 @@
 				case 'client':
 					try
 					{
-						bdd::init();
-						$result = bdd::$_pdo->prepare('SELECT RaisonSociale FROM client where id = :idUser');
+						$result = bdd::$_pdo->prepare('SELECT raisonSociale FROM client where id = :idUser');
 						$result->bindParam("idUser",$idUser,PDO::PARAM_INT);
 						$result->execute();
+						$result->setFetchMode(PDO::FETCH_OBJ);
 						$result = $result->fetch();
-						$login = strtolower($result['raisonSociale']);
+						$login = strtolower($result->raisonSociale);
 						$login = str_replace(CHR(32),"",$login);
 						$login = preg_replace("#[^a-zA-Z]#", "", $login);
 						if(strlen($login) > 10)
@@ -214,7 +214,7 @@
 							$login = substr($login,0,10);
 						}
 						$mdp = self::genererMDP();
-						$logins = ["login" => $login, "mdp" => $mdp,];
+						$logins = ["login" => $login, "mdp" => $mdp];
 					}
 					catch(Exception $e)
 					{
