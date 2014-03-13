@@ -22,6 +22,7 @@ switch ($_REQUEST["page"]) {
 			<ul>
 				<li><a href="<?php echo URL_ROOT; ?>projets/liste">Liste complète</a></li>
 				<li><a href="<?php echo URL_ROOT; ?>projets/actifs-termines">Projets Actifs / Terminés</a></li>
+				<li><a href="<?php echo URL_ROOT; ?>projets/non-affectes">Projets non non-affectes</a></li>
 				<li><a href="<?php echo URL_ROOT; ?>projets/ajout">Ajout d'un projet</a></li>
 			</ul>
 		</div>
