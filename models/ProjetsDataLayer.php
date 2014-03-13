@@ -274,7 +274,6 @@
                                                 WHERE    status NOT IN ('A')   
                                              ");
 
-                $result->bindParam(":id", $adherent, PDO::PARAM_INT);
                 $result->execute();
                 $result->setFetchMode(PDO::FETCH_OBJ);
                 $result = $result->fetchAll();
