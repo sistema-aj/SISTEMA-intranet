@@ -14,7 +14,7 @@
 
 	<div>
 		<div style="float:left;width:50%">
-			<p>Compétences :<br/>
+			<p><u>Compétences :</u><br/>
 			<?php if(count($data->competences) != 0) { 
 				foreach ($data->competences as $elt) { ?>
 					<span class="skill"><?php echo $elt->nom; ?></span>
@@ -26,14 +26,26 @@
 		</div>
 
 		<div style="float:right">
-			<p>Projets en cours :
-				<ul>
-				</ul>
-			</p>
-
 			<p>Affecter à un projet :</br>
-				<select>
+				<select name="">
+					<?php if(count($data->projets) != 0) { 
+						foreach ($data->projets as $elt) { ?>
+							<option value="<?php echo $elt->titre; ?>">
+								<?php echo $elt->titre; ?>
+							</option>
+					<?php } 
+					} ?>	
 				</select>
+			</p>
+			
+			<p><u>Projets en cours :</u><br/>
+				<?php if(count($data->projetsAdh) != 0) { 
+					foreach ($data->projetsAdh as $elt) { ?>
+						<span class="projet"><?php echo $elt->titre; ?></span>
+				<?php }
+				} else { ?>
+					<span>Aucune projet actif</span>
+				<?php } ?>
 			</p>
 		</div>
 	</div>

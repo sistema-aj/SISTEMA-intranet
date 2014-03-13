@@ -6,6 +6,8 @@
 					case 'adherent' :
 						$data->adherent = AdherentsDataLayer::getAdherent($_REQUEST['user']);
 						$data->competences = Competences::getCompetencesParAdh($_REQUEST['user']);
+						$data->projetsAdh = ProjetsDataLayer::getProjetParAdherent($_REQUEST['user']);
+						$data->projets = ProjetsDataLayer::getProjetsNonArchives();
 						ViewManager::displayViews(array('aAdhDetails'));
 						break;
 				}
