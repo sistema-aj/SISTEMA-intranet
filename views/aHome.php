@@ -1,3 +1,4 @@
+<?php if(!empty($data->candidats)) { ?>
 <table id="aAdhSistema" style="width:100%">
 	<tr>
 		<th>Nom</th>
@@ -29,7 +30,11 @@
 	</tr>
 	<?php } ?>
 </table>
+<?php } else { ?>
+	<div style="text-align:center">Aucune demande d'adhésion à SISTEMA n'est en cours.</div>
+<?php } ?>
 
+<?php if(!empty($data->adhesionsPro)) { ?>
 <table id="aAdhProjets" style="width:100%">
 	<tr>
 		<th>Nom</th>
@@ -67,3 +72,6 @@
 	</tr>
 	<?php } ?>
 </table>
+<?php } else { ?>
+	<div style="text-align:center">Aucune demande d'adhésion à un projet n'est en cours.</div>
+<?php } ?>

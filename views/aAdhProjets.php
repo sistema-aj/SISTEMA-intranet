@@ -1,3 +1,4 @@
+<?php if(!empty($data->adhesions)) { ?>
 <table id="aAdhProjets" style="width:100%">
 	<tr>
 		<th>Nom</th>
@@ -35,3 +36,6 @@
 	</tr>
 	<?php } ?>
 </table>
+<?php } else { ?>
+	<div style="text-align:center">Aucune demande d'adhésion à un projet n'est en cours.</div>
+<?php } ?>
