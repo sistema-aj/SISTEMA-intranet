@@ -1,6 +1,7 @@
 <?php
 	ViewManager::setActiveCss(array('general'));
-
+	ViewManager::setActiveJs(array('display-fiche'));
+	
 	ViewManager::displayHeader();
 
 	switch ($_SESSION['user_type']) {
