@@ -47,7 +47,7 @@
 			try
 			{
 				// recuperation des informations
-				$result = bdd::$_pdo->prepare(" SELECT titre, description, type, status
+				$result = bdd::$_pdo->prepare(" SELECT titre, description, type, status, client
 												FROM   projet JOIN client ON client.id = projet.client 
 												AND    projet.client = :id"
 											  );
@@ -86,8 +86,8 @@
 			try
 			{
 				// recuperation des informations
-				$result = bdd::$_pdo->prepare(" SELECT titre, description, type, status
-												FROM projet
+				$result = bdd::$_pdo->prepare(" SELECT titre, description, type, status, raisonSociale as client
+												FROM   projet JOIN client ON client.id = projet.client 
 												WHERE status = 'N'
 												ORDER BY :tri");
 				$result->bindParam(":tri", $critereTri, PDO::PARAM_INT);
@@ -110,13 +110,13 @@
 		 * @return  Array
 		 * @version 1
 		 */
-		public static function getProjetsActifsTermines($critereTri)
+		public static function getProjetsActifsTermines($critereTri) 
 		{
 			try
 			{
 				// recuperation des informations
-				$result = bdd::$_pdo->prepare(" SELECT DISTINCT  id, titre, description, type, status
-												FROM projet 
+				$result = bdd::$_pdo->prepare(" SELECT DISTINCT  id, titre, description, type, status, raisonSociale as client
+                                                FROM   projet JOIN client ON client.id = projet.client 
 												WHERE status NOT IN ('N')
 												ORDER BY :tri");
 				$result->bindParam(":tri", $critereTri, PDO::PARAM_INT);
@@ -200,7 +200,7 @@
 		/**
 		 * récupère la liste des Adherents demandant à adherer au projet spécifié
 		 * 
-		 * @author 
+		 * @author  Guemas Anthony
 		 * @param   projet $projet 	objet de type projet dont on veut obtenir la liste des demandes 
 		 * @version 0
 		 */
@@ -227,6 +227,64 @@
 			}
 		}
 
+        /**
+         * récupère la liste des projets pour l'adhrent spécifié
+         * 
+         * @author  Guemas Anthony
+         * @param   identifiant $adherent  identifiant de l'adherent sur lequel porte la requete 
+         * @version 0
+         */
+        public static function getProjetParAdherent($adherent)
+        {
+            try
+            {
+                // recuperation des informations
+                $result = bdd::$_pdo->prepare(" SELECT   titre, description, type, projet.status, raisonSociale as client
+                                                FROM     projet JOIN participer ON projet.id = participer.projet
+                                                                JOIN client     ON projet.client = client.id
+                                                WHERE    participer.user = :id    
+                                             ");
+
+                $result->bindParam(":id", $adherent, PDO::PARAM_INT);
+                $result->execute();
+                $result->setFetchMode(PDO::FETCH_OBJ);
+                $result = $result->fetchAll();
+                return $result;
+            }
+            catch(Exception $e)
+            {
+                return $e;
+            }
+        }
+
+         /**
+         * récupère la liste des projets non terminés
+         * 
+         * @author  Guemas Anthony
+         * @param   identifiant $adherent  identifiant de l'adherent sur lequel porte la requete 
+         * @version 0
+         */
+        public static function getProjetsNonArchives()
+        {
+            try
+            {
+                // recuperation des informations
+                $result = bdd::$_pdo->prepare(" SELECT   titre, description, type, projet.status, raisonSociale as client
+                                                FROM     projet JOIN client     ON projet.client = client.id
+                                                WHERE    status NOT IN ('A')   
+                                             ");
+
+                $result->bindParam(":id", $adherent, PDO::PARAM_INT);
+                $result->execute();
+                $result->setFetchMode(PDO::FETCH_OBJ);
+                $result = $result->fetchAll();
+                return $result;
+            }
+            catch(Exception $e)
+            {
+                return $e;
+            }
+        }
 
 	}
 ?>
