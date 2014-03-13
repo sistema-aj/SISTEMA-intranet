@@ -27,15 +27,19 @@
 
 		<div style="float:right">
 			<p>Affecter à un projet :</br>
-				<select name="">
-					<?php if(count($data->projets) != 0) { 
-						foreach ($data->projets as $elt) { ?>
-							<option value="<?php echo $elt->titre; ?>">
-								<?php echo $elt->titre; ?>
-							</option>
-					<?php } 
-					} ?>	
-				</select>
+				<form action="<?php echo URL_ROOT; ?>adherents/affecter-projet" method="POST">
+					<select name="projet">
+						<?php if(count($data->projets) != 0) { 
+							foreach ($data->projets as $elt) { ?>
+								<option value="<?php echo $elt->id; ?>">
+									<?php echo $elt->titre; ?>
+								</option>
+						<?php } 
+						} ?>
+					</select>
+					<input type="hidden" name="user" value="<?php echo $data->adherent->id; ?>">
+					<input type="submit" value="Affecter"/>
+				</form>
 			</p>
 			
 			<p><u>Projets en cours :</u><br/>

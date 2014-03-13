@@ -249,6 +249,36 @@
             }
         }
 
+        /**
+         * Récupère la liste des projets actifs / en attente sur lesquels
+         * l'adhérent n'est pas affecté.
+         * @author Deleuil Maxime
+         * @param $adherent identifiant de l'adherent
+         * @return Array liste des projets
+         * @version 1.0.0
+         */
+		public static function getProjetsNonAffecteParAdherent($adherent)
+        {
+            try
+            {
+                // recuperation des informations
+                $result = bdd::$_pdo->prepare(" SELECT DISTINCT id, titre
+												FROM projet
+												WHERE id NOT IN ( SELECT projet FROM participer
+             													WHERE user = :id
+                												AND status IN('A','O'))");
+                $result->bindParam(":id", $adherent, PDO::PARAM_INT);
+                $result->execute();
+                $result->setFetchMode(PDO::FETCH_OBJ);
+                $result = $result->fetchAll();
+                return $result;
+            }
+            catch(Exception $e)
+            {
+                return $e;
+            }
+        }        
+
          /**
          * récupère la liste des projets non terminés
          * 

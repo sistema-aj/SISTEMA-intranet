@@ -20,6 +20,11 @@
 						$data->adhesions = ProjetsDataLayer::getAdhesions();
 						ViewManager::displayViews(array("aMenu", "aSubMenu", "aAdhProjets"));
 						break;
+					case 'affecter-projet':
+						Administration::affecterAuProjet($_REQUEST['user'], $_REQUEST['projet']);
+						$data->adherents = AdherentsDataLayer::getAdherents();
+						ViewManager::displayViews(array("aMenu", "aSubMenu", "aAdhListe"));
+						break;
 					default:
 						ViewManager::displayViews(array("aMenu", "aSubMenu", "404"));
 						break;
