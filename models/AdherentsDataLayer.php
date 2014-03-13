@@ -43,7 +43,7 @@
 				$result->execute();
 				$result->setFetchMode(PDO::FETCH_OBJ);
 				$result = $result->fetch();
-
+				
 				$tel     	= $result->telephone;
 				$mail    	= $result->mail;
 				$adresse 	= $result->adresse;
@@ -53,7 +53,7 @@
 				$nom     	= $result->nom;
 				$prenom  	= $result->prenom;
 				$promo	 	= $result->promo;
-				return new Adherent($id, $tel, $mail, $adresse, $codePostal, $ville, $actif, $nom, $prenom, $promo);
+				return new Adherents($id, $tel, $mail, $adresse, $codePostal, $ville, $actif, $prenom, $nom, $promo);
 
 			} catch (Exception $e) {
 				return $e;
