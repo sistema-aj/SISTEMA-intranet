@@ -242,7 +242,8 @@
                 $result = bdd::$_pdo->prepare(" SELECT   titre, description, type, projet.status, raisonSociale as client
                                                 FROM     projet JOIN participer ON projet.id = participer.projet
                                                                 JOIN client     ON projet.client = client.id
-                                                WHERE    participer.user = :id    
+                                                WHERE    participer.user = :id
+                                                AND participer.status NOT IN('A','R')    
                                              ");
 
                 $result->bindParam(":id", $adherent, PDO::PARAM_INT);
