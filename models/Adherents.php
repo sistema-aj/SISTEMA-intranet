@@ -19,12 +19,22 @@
 		 * @author  Guemas Anthony
 		 * @version 1.0.1
 		 */
-		public __construct($id, $tel, $mail, $adresse, $codePostal, $ville, $actif, $prenom, $nom, $promo)
+		public function __construct($id, $tel, $mail, $adresse, $codePostal, $ville, $actif, $prenom, $nom, $promo)
 		{
-			parent($id, $tel, $mail, $adresse, $codePostal, $ville, $actif);
+			parent::__construct($id, $tel, $mail, $adresse, $codePostal, $ville, $actif);
 			$this->prenom 	= $prenom;
 			$this->nom 		= $nom;
 			$this->promo 	= $promo;
+		}
+
+		public function __set($index, $value)
+		{
+			$this->$index = $value;
+		}
+		
+		public function __get($index)
+		{
+			return $this->$index;
 		}
 	}
 ?>
