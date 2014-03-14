@@ -21,3 +21,47 @@ body, html{
 	margin: 0;
 	margin-left: 4%;
 }
+
+#file {
+	/* size */
+	width: 50%;
+	height: 50%;
+	/* position */
+	padding: 20px;
+	position: absolute;
+	top: 25%;
+	left: 25%;
+	/* style */
+	background-color: white;
+	border: 1px solid black;
+}
+
+#file img {
+	/* position */
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	/* style */
+	cursor: pointer;
+}
+
+#file .skill {
+	padding: 5px;
+	margin: 5px;
+	/* style */
+	display: inline-block;
+	border: 1px solid grey;
+}
+
+#shadowing {
+	/* size */
+	width: 100%;
+	height: 100%;
+	/* position */
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	/* style */
+	background-color: black;
+	opacity: 0.5;
+}

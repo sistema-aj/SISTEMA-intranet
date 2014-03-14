@@ -26,7 +26,7 @@
 		 * @author 	 Guemas Anthony
 		 * @version  1.1.0
 		 */
-		public __construct($id, $tel, $mail, $adresse, $codePostal, $ville, $actif)
+		public function __construct($id, $tel, $mail, $adresse, $codePostal, $ville, $actif)
 		{
 			$this->id 		= $id;
 			$this->tel		= $tel;
@@ -35,6 +35,16 @@
 			$this->codePostal = $codePostal;
 			$this->ville 	= $ville;
 			$this->actif 	= $actif;
+		}
+
+		public function __set($index, $value)
+		{
+			$this->$index = $value;
+		}
+		
+		public function __get($index)
+		{
+			return $this->$index;
 		}
 	}
 ?>

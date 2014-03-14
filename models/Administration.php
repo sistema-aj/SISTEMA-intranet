@@ -429,7 +429,18 @@
 
 		public static function affecterAuProjet($idAdh, $idPro) 
 		{
-
+			try {
+				bdd::$_pdo->beginTransaction();
+				$insert = bdd::$_pdo->prepare("INSERT INTO participer
+												VALUES (:user, :projet, 0, 'O')");
+				$insert->bindParam(":user",$idAdh,PDO::PARAM_INT);
+				$insert->bindParam(":projet",$idPro,PDO::PARAM_INT);
+				$insert->execute();
+				bdd::$_pdo->commit();
+			} catch (Exception $e) {
+				bdd::$_pdo->rollBack();
+				throw new Exception($e->getMessage());
+			}
 		}
 
 		public static function detacherDuProjet($idAdh, $idPro)
