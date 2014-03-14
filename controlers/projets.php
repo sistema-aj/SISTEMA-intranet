@@ -1,5 +1,6 @@
 <?php
 	ViewManager::setActiveCss(array('general'));
+	ViewManager::setActiveJs(array('display-fiche'));
 
 	ViewManager::displayHeader();
 
@@ -56,13 +57,6 @@
 						$data->projets = ProjetsDataLayer::getProjetsNonAffectes('titre');
 						$data->titre   = 'Projets Non Affectes ';
 						ViewManager::displayViews(array("aMenu", "aSubMenu", "aProListe"));
-						break;
-
-						case 'detail' : 
-						$projet = $_REQUEST['projet'];
-						$data->adherents = ProjetsDataLayer::getAdhesionsParProjet( $projet );
-						$data->projet    = ProjetsDataLayer::getDetailProjet( $projet );
-						ViewManager::displayViews(array("aMenu", "aSubMenu", "aProDetail"));
 						break;
 
 						default:

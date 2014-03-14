@@ -8,11 +8,11 @@
 <table id="aProListe" style="width:100%">
 
 	<tr>
-		<th>Titre</th>
-		<th></th>
-		<th>Type</th>
-		<th>Client</th>
-		<th>Status</th>
+		<th> Titre 	</th>
+		<th> Type 	</th>
+		<th> Client	</th>
+		<th> Status	</th>
+		<th>	 	</th>
 	</tr>
 
 	<?php 
@@ -21,13 +21,10 @@
 	?>
 
 		<tr>
-			<td>	<?php echo $projet->titre; ?>		 </td>
-			<td>
-				<form action="<?php echo URL_ROOT; ?>projets/detail" style="display:inline-block" method="POST">
-					<input type="hidden" name="projet" value="<?php echo $projet->id; ?>" />
-					<a href="#" onclick="this.parentNode.submit()"><img src="file.png"/></a>
-				</form>
+			<td>	
+				<?php echo $projet->titre; ?>		 
 			</td>
+
 			<td> 	<?php echo $projet->type; ?>		 </td>
 			<td>	<?php echo $projet->client; ?>		 </td>
 
@@ -43,6 +40,13 @@
 					 ?>
 	 		</td>
 
+	 		<td>	
+	 			<!-- Image contenant les propriétés necessaires à l'appel de la fonction Js Display-fiche -->				
+				<a style='cursor:pointer' class = 'file-button' type = 'projet' id = '<?php echo $projet->id; ?>' >
+					 <img src="file.png"/> 
+				</a>
+			</td>
+
 		</tr>
 
 	<?php 
@@ -50,3 +54,10 @@
     ?>
     
 </table>
+
+<!-- propriétés recupérés par la fonction js Display-fiche -->
+<div id="file" style="z-index:2">
+	<span id="content"></span>
+	<img src="x-mark.png"/>
+</div>
+<div id="shadowing" style="z-index:1"></div>
