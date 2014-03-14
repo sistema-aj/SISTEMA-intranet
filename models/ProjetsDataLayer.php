@@ -47,7 +47,7 @@
 			try
 			{
 				// recuperation des informations
-				$result = bdd::$_pdo->prepare(" SELECT projet.id, titre, description, type, status, client
+				$result = bdd::$_pdo->prepare(" SELECT projet.id, titre, description, type, status, raisonSociale as client
 												FROM   projet JOIN client ON client.id = projet.client 
 												AND    projet.id = :id"
 											  );
@@ -206,7 +206,7 @@
 												AND 	 participer.projet = :id	
 											 ");
 
-				$result->bindParam(":id", $projet->id, PDO::PARAM_INT);
+				$result->bindParam(":id", $id, PDO::PARAM_INT);
 				$result->execute();
 				$result->setFetchMode(PDO::FETCH_OBJ);
 				$result = $result->fetchAll();
@@ -217,6 +217,38 @@
 				return $e;
 			}
 		}
+
+        /**
+         * récupère la liste des Adherents participant au projet spécifié
+         * 
+         * @author  Guemas Anthony
+         * @param   identifiant $id  identifiant du projet dont on veut obtenir la liste des adherents
+         * @version 0
+         */
+        public static function getAdherentsParProjet($id)
+        {
+            try
+            {
+                // recuperation des informations
+                $result = bdd::$_pdo->prepare(" SELECT   utilisateur.id, telephone, mail, adresse, codePostal, ville, actif, nom, prenom, promo, chefProjet
+                                                FROM     utilisateur JOIN adherent   ON utilisateur.id = adherent.id
+                                                                     JOIN participer ON adherent.id = participer.user 
+                                                WHERE    participer.status = 'O'
+                                                AND      participer.projet = :id    
+                                             ");
+
+                $result->bindParam(":id", $id, PDO::PARAM_INT);
+                $result->execute();
+                $result->setFetchMode(PDO::FETCH_OBJ);
+                $result = $result->fetchAll();
+                return $result;
+            }
+            catch(Exception $e)
+            {
+                return $e;
+            }
+        }
+
 
         /**
          * récupère la liste des projets pour l'adhrent spécifié
@@ -300,6 +332,24 @@
                 $result->setFetchMode(PDO::FETCH_OBJ);
                 $result = $result->fetchAll();
                 return $result;
+            }
+            catch(Exception $e)
+            {
+                return $e;
+            }
+        }
+
+         /**
+         * Change le chef de Projet
+         * 
+         * @author  Guemas Anthony
+         * @version 0
+         */
+        public static function setChefProjet($id)
+        {
+            try
+            {
+               
             }
             catch(Exception $e)
             {

@@ -16,6 +16,10 @@
 						$data->adherents = ProjetsDataLayer::getAdherentsParProjet($_REQUEST['id']);
 						ViewManager::displayViews(array('aProDetails'));
 					break;
+
+					case 'changementCdP' :
+						
+					break;
 				}
 			}
 			break;
