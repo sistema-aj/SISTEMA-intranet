@@ -10,9 +10,10 @@
 						$data->projets = ProjetsDataLayer::getProjetsNonAffecteParAdherent($_REQUEST['id']);
 						ViewManager::displayViews(array('aAdhDetails'));
 						break;
+						
 					case 'projet' :
 						$data->projet = ProjetsDataLayer::getDetailProjet($_REQUEST['id']);
-						$data->adherents = ProjetsDataLayer::getAdherentsParProjet($_REQUEST['id'])
+						$data->adherents = ProjetsDataLayer::getAdherentsParProjet($_REQUEST['id']);
 						ViewManager::displayViews(array('aProDetails'));
 					break;
 				}
