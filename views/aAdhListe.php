@@ -22,4 +22,3 @@
 	<img src="x-mark.png"/>
 </div>
 <div id="shadowing" style="z-index:1"></div>
-</div>
