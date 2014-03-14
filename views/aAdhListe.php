@@ -17,7 +17,9 @@
 	<?php } ?>
 </table>
 
-<div id="file">
+<div id="file" style="z-index:2">
 	<span id="content"></span>
 	<img src="x-mark.png"/>
+</div>
+<div id="shadowing" style="z-index:1"></div>
 </div>

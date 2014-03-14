@@ -52,3 +52,16 @@ body, html{
 	display: inline-block;
 	border: 1px solid grey;
 }
+
+#shadowing {
+	/* size */
+	width: 100%;
+	height: 100%;
+	/* position */
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	/* style */
+	background-color: black;
+	opacity: 0.5;
+}
