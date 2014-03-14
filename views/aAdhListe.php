@@ -11,7 +11,9 @@
 		<td><?php echo $user->prenom; ?></td>
 		<td><?php echo $user->promo; ?></td>
 		<td>
-			<a style="cursor:pointer" class="file-button" user="<?php echo $user->id; ?>"><img src="file.png"/></a>
+			<a style="cursor:pointer" class="file-button" id="<?php echo $user->id; ?>" type="adherent">
+				<img src="file.png"/>
+			</a>
 		</td>
 	</tr>
 	<?php } ?>
