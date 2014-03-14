@@ -35,3 +35,9 @@
 <?php } else { ?>
 	<div style="text-align:center">Aucune demande d'adhésion à un projet n'est en cours.</div>
 <?php } ?>
+
+<div id="file" style="z-index:2">
+	<span id="content"></span>
+	<img src="x-mark.png"/>
+</div>
+<div id="shadowing" style="z-index:1"></div>
