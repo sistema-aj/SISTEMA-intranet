@@ -6,7 +6,6 @@
 		<th>Promo</th>
 		<th>Téléphone</th>
 		<th>Mail</th>
-		<th>CV</th>
 		<th>Validation</th>
 	</tr>
 	<?php foreach ($data->candidats as $user) { ?>
@@ -16,9 +15,6 @@
 		<td><?php echo $user->promo; ?></td>
 		<td><?php echo $user->telephone; ?></td>
 		<td><?php echo $user->mail; ?></td>
-		<td>
-			<a href=""><img src="file.png"/></a>
-		</td>
 		<td>
 			<form action="<?php echo URL_ROOT; ?>candidatures/valider-candidat" style="display:inline-block" method="POST">
 				<input type="hidden" name="id" value="<?php echo $user->id; ?>" />
