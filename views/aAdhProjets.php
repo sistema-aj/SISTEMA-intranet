@@ -15,7 +15,9 @@
 		<td><?php echo $user->promo; ?></td>
 		<td><?php echo $user->titre; ?></td>
 		<td>
-			<a style="cursor:pointer" class="file-button" user="<?php echo $user->id; ?>"><img src="file.png"/></a>
+			<a style="cursor:pointer" class="file-button" id="<?php echo $user->id; ?>" type="adherent">
+				<img src="file.png"/>
+			</a>
 		</td>
 		<td>
 			<form action="<?php echo URL_ROOT; ?>candidatures/valider-candidatPro" style="display:inline-block" method="POST">

@@ -3,9 +3,10 @@ $(function() {
 	$('#shadowing').hide();
 	
 	$('.file-button').click(function() {
-		url = "http://localhost:81/SISTEMA-intranet/details/adherent";
-		user = $(this).attr('user');
-		$('#file #content').load(url,{"user":user}, function() {
+		id = $(this).attr('id');
+		type = $(this).attr('type');
+		url = "http://localhost:81/SISTEMA-intranet/details/"+type;
+		$('#file #content').load(url,{"id":id}, function() {
 			$('#file').show();
 			$('#shadowing').show();
 		});
