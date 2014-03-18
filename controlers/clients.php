@@ -35,7 +35,7 @@
 						{
 							// message d'erreur personnalisé
 							$data->error = $e->getMessage();
-							ViewManager::displayViews(array("aMenu", "aSubMenu", "aCliAjout"));
+							ViewManager::displayViews(array("aMenu","aCliAjout"));
 						}										
 						break;				
 					default:
