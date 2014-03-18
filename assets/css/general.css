@@ -1,15 +1,33 @@
 body, html{
 	height:100%;
-	width:100%;
-	background-color: beige;
-	margin: 0;
+}
+
+.wrapper {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -4em;
+}
+
+.footer{
+	background-image: linear-gradient(to bottom, #3C3C3C 0px, #222222 100%);
+    background-repeat: repeat-x;
+    color:#BAABA6;
+}
+
+.footer, .push{
+	height: 4em;
 }
 
 /* HEADER */
+.logo{
+	margin-left:10%;
+
+}
+
 #header {
 	width: 100%;
-	background-color: #046380;
-	color: orange;
+	background-color: #F6F6F6;
 }
 
 #header h1 {
@@ -65,3 +83,15 @@ body, html{
 	background-color: black;
 	opacity: 0.5;
 }
+
+.title{
+	color: #0767AC;
+    font-weight: normal;
+    font-size:25px;
+    margin-bottom: 0.5rem;
+}
+
+.hrTitle{
+	border-color: #000000;
+}
+

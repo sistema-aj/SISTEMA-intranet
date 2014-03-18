@@ -1,5 +1,7 @@
+<h1 class="title"> Demande d'adhésion à SISTEMA </h1>
+<hr class="hrTitle"/>
 <?php if(!empty($data->candidats)) { ?>
-<table id="aAdhSistema" style="width:100%">
+<table class="table table-bordered table-striped" id="aAdhSistema" style="width:100%">
 	<tr>
 		<th>Nom</th>
 		<th>Prénom</th>
@@ -31,11 +33,13 @@
 	<?php } ?>
 </table>
 <?php } else { ?>
-	<div style="text-align:center">Aucune demande d'adhésion à SISTEMA n'est en cours.</div>
+	<div style="text-align:center">Aucune demande n'est en cours.</div>
 <?php } ?>
-
+<br/> 
+<h1 class="title"> Demande d'affectation à un projet </h1>
+<hr class="hrTitle"/>
 <?php if(!empty($data->adhesionsPro)) { ?>
-<table id="aAdhProjets" style="width:100%">
+<table class="table table-bordered table-striped" id="aAdhProjets" style="width:100%">
 	<tr>
 		<th>Nom</th>
 		<th>Prénom</th>
@@ -71,7 +75,7 @@
 	<?php } ?>
 </table>
 <?php } else { ?>
-	<div style="text-align:center">Aucune demande d'adhésion à un projet n'est en cours.</div>
+	<div style="text-align:center">Aucune demande n'est en cours.</div>
 <?php } ?>
 
 <div id="file" style="z-index:2">

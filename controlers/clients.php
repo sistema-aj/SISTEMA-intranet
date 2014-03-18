@@ -10,7 +10,7 @@
 					case 'liste':
 						// instanciation des variables à communiquer
 						$data->clients = ClientsDataLayer::getClients();
-						ViewManager::displayViews(array("aMenu", "aSubMenu", "aCliListe"));
+						ViewManager::displayViews(array("aMenu", "aCliListe"));
 						break;
 					case 'ajout':
 						// instanciation des variables à communiquer
@@ -24,15 +24,15 @@
 							// message d'erreur personnalisé
 							$data->error = "Echec de la création : veuillez indiquer toutes les données.";
 						}
-						ViewManager::displayViews(array("aMenu", "aSubMenu", "aCliAjout"));
+						ViewManager::displayViews(array("aMenu", "aCliAjout"));
 						break;
 					default:
-						ViewManager::displayViews(array("aMenu", "aSubMenu", "404"));
+						ViewManager::displayViews(array("aMenu", "404"));
 						break;
 				}
 			} else {
 				$data->clients = ClientsDataLayer::getClients();
-				ViewManager::displayViews(array("aMenu", "aSubMenu", "aCliListe"));
+				ViewManager::displayViews(array("aMenu", "aCliListe"));
 			}
 			break;
 		default:

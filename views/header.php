@@ -1,3 +1,5 @@
 <div id="header">
-	<h1><?php echo Config::$_nomSite ?></h1>
+	<div class="logo">
+		<a href="<?php echo URL_ROOT; ?>home"><img src="assets/img/sistemaLogo.png" width="350"/></a>
+	</div>
 </div>

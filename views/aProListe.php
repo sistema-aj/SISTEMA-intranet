@@ -1,11 +1,12 @@
 
-<h1> 
+<h1 class="title"> 
 	<?php 
 		echo $data->titre;
 	?>
 </h1>
+<hr class="hrTitle"/>
 
-<table id="aProListe" style="width:100%">
+<table class="table table-bordered table-striped" id="aProListe" style="width:100%">
 
 	<tr>
 		<th> Titre 	</th>

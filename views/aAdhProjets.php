@@ -1,5 +1,8 @@
+<h1 class="title"> Demande d'adhésion à un projet </h1>
+<hr class="hrTitle"/>
+
 <?php if(!empty($data->adhesions)) { ?>
-<table id="aAdhProjets" style="width:100%">
+<table class="table table-bordered table-striped" id="aAdhProjets" style="width:100%">
 	<tr>
 		<th>Nom</th>
 		<th>Prénom</th>

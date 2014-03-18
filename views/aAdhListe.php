@@ -1,4 +1,7 @@
-<table id="aAdhListe" style="width:100%">
+<h1 class="title"> Liste des adhérants </h1>
+<hr class="hrTitle"/>
+<table class="table table-bordered table-striped" id="aAdhListe" style="width:100%">
+
 	<tr>
 		<th>Nom</th>
 		<th>Prénom</th>
@@ -16,6 +19,7 @@
 			</a>
 		</td>
 	</tr>
+
 	<?php } ?>
 </table>
 

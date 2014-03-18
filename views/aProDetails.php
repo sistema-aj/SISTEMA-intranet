@@ -11,7 +11,7 @@
 
 	<form name="changeChefProjet" action="<?php echo URL_ROOT; ?>detail/changementCdP" method="post">
 
-		<table>
+		<table class="table table-bordered table-striped">
 
 			<tr>
 				<th> Nom 	</th>

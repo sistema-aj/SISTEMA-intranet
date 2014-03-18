@@ -8,7 +8,7 @@
 		case 'A':
 			$data->candidats = Administration::getCandidats();
 			$data->adhesionsPro = ProjetsDataLayer::getAdhesions();
-			ViewManager::displayViews(array("aMenu", "aSubMenu", "aHome"));
+			ViewManager::displayViews(array("aMenu","aHome"));
 			break;
 		case 'C':
 			ViewManager::displayViews(array());

@@ -12,7 +12,7 @@
 					{
 						case 'ajout' : 
 						$data->clients = ClientsDataLayer::getClients();
-						ViewManager::displayViews(array("aMenu", "aSubMenu", "aProAjout"));
+						ViewManager::displayViews(array("aMenu","aProAjout"));
 						break;
 
 						case 'ajout-action' : 
@@ -44,23 +44,23 @@
 						case 'liste' : 
 						$data->projets = ProjetsDataLayer::getProjetsNonArchives();
 						$data->titre   = 'Projets en cours';
-						ViewManager::displayViews(array("aMenu", "aSubMenu", "aProListe"));
+						ViewManager::displayViews(array("aMenu", "aProListe"));
 						break;
 
 						case 'actifs-termines' : 
 						$data->projets = ProjetsDataLayer::getProjetsActifsTermines('titre');
 						$data->titre   = 'Projets Actifs ou Terminés ';
-						ViewManager::displayViews(array("aMenu", "aSubMenu", "aProListe"));
+						ViewManager::displayViews(array("aMenu", "aProListe"));
 						break;
 
 						case 'non-affectes' : 
 						$data->projets = ProjetsDataLayer::getProjetsNonAffectes('titre');
 						$data->titre   = 'Projets Non Affectes ';
-						ViewManager::displayViews(array("aMenu", "aSubMenu", "aProListe"));
+						ViewManager::displayViews(array("aMenu", "aProListe"));
 						break;
 
 						default:
-						ViewManager::displayViews(array("aMenu", "aSubMenu", "404"));
+						ViewManager::displayViews(array("aMenu", "404"));
 						break;
 					}
 				}
@@ -68,7 +68,7 @@
 				{
 					$data->projets = ProjetsDataLayer::getProjetsNonAffectes('titre');
 					$data->titre   = 'Projets Non Affectes ';
-					ViewManager::displayViews(array("aMenu", "aSubMenu", "aProListe"));
+					ViewManager::displayViews(array("aMenu", "aProListe"));
 				}
 			break;
 
@@ -81,7 +81,7 @@
 						case 'listeNonAffectes' : 
 						$data->projets = ProjetsDataLayer::getProjetsNonAffectes();
 						$data->titre   = 'Projets disponibles';
-						ViewManager::displayViews(array("aMenu", "aSubMenu", "eProListe"));
+						ViewManager::displayViews(array("aMenu", "eProListe"));
 						break;
 
 						default : ;
@@ -106,7 +106,7 @@
 						case 'liste' : 
 						$data->projets = ProjetsDataLayer::getProjetsParClient();
 						$data->titre   = 'Vos Projets';
-						ViewManager::displayViews(array("aMenu", "aSubMenu", "cProListe"));
+						ViewManager::displayViews(array("aMenu", "cProListe"));
 						break;
 
 						default : ;
@@ -118,7 +118,7 @@
 				{
 					$data->projets = ProjetsDataLayer::getProjetsParClient();
 					$data->titre   = 'Vos Projets';
-					ViewManager::displayViews(array("aMenu", "aSubMenu", "cProListe"));
+					ViewManager::displayViews(array("aMenu", "cProListe"));
 				}
 			break;
 

@@ -5,7 +5,7 @@ $(function() {
 	$('.file-button').click(function() {
 		id = $(this).attr('id');
 		type = $(this).attr('type');
-		url = "http://localhost:81/SISTEMA-intranet/details/"+type;
+		url = "http://localhost/SISTEMA-intranetV2/details/"+type;
 		$('#file #content').load(url,{"id":id}, function() {
 			$('#file').show();
 			$('#shadowing').show();

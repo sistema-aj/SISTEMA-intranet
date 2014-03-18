@@ -1,4 +1,6 @@
-<table id="aCliListe" style="width:100%">
+<h1 class="title"> Liste des clients </h1>
+<hr class="hrTitle"/>
+<table class="table table-bordered table-striped" id="aCliListe" style="width:100%">
 	<tr>
 		<th>RaisonSociale</th>
 		<th>Adresse</th>
