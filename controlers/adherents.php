@@ -3,11 +3,15 @@
 	ViewManager::setActiveJs(array('display-fiche'));
 
 	ViewManager::displayHeader();
-
-	switch ($_SESSION['user_type']) {
+	$data->succes = "";
+	$data->error = "";
+	switch ($_SESSION['user_type']) 
+	{
 		case 'A':
-			if(isset($_REQUEST["action"])) {
-				switch ($_REQUEST["action"]) {
+			if(isset($_REQUEST["action"])) 
+			{
+				switch ($_REQUEST["action"]) 
+				{
 					case 'liste':
 						$data->adherents = AdherentsDataLayer::getAdherents();
 						ViewManager::displayViews(array("aMenu", "aAdhListe"));
@@ -29,7 +33,8 @@
 						ViewManager::displayViews(array("aMenu", "404"));
 						break;
 				}
-			} else {
+			} else 
+			{
 				$data->adherents = AdherentsDataLayer::getAdherents();
 				ViewManager::displayViews(array("aMenu", "aAdhListe"));
 			}
@@ -38,6 +43,5 @@
 			ViewManager::displayViews(array("404"));
 			break;	
 	}
-
 	ViewManager::displayFooter();
 ?>

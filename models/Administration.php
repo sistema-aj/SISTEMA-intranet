@@ -142,7 +142,7 @@
 			catch (Exception $e) 
 			{
 			  bdd::$_pdo->rollBack();
-			  echo "Failed: " . $e->getMessage();
+			  throw new Exception("Une erreur est survenue, veuillez réesayer");
 			}
 		}
 
@@ -363,7 +363,7 @@
 											WHERE id = :id");
 				$result->bindParam(":id",$id,PDO::PARAM_INT);
 				$result->execute();
-				// activation de l'utilisateur
+				// supression de l'utilisateur
 				$result = bdd::$_pdo->prepare("DELETE FROM utilisateur
 											WHERE id = :id");
 				$result->bindParam(":id",$id,PDO::PARAM_INT);
@@ -378,7 +378,7 @@
 					$message = 'Bonjour,
 
 					Nous vous informons que votre candidature a été refusée par la direction de SISTEMA.
-					Cependant, ceci ne remet pas en cause la qualité de votre profil.
+					Cependant, ceci ne remet pas en cause la qualité de votre profil, et vous souhaitons une bonne continuation.
 
 					Cordialement,
 					La direction de SISTEMA.

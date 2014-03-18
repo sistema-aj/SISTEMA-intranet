@@ -1,3 +1,8 @@
+<?php if($data->error != "")
+{
+	echo "<div class=\"alert-message fade in error\" id=\"diverror\" style=\"display:block;\">$data->error<a href=\"#\" onclick=\"fermeture('#diverror');return false;\" class=\"close\">x</a></div>";
+}
+?>
 <form class="form-horizontal" name="addProjet" action="<?php echo URL_ROOT; ?>projets/ajout-action" method="post">
 	<div class="form-group" id="aProAjout">
 		<div class="form-group">
@@ -41,5 +46,11 @@
 				<input type ="submit" class="btn btn-info btn-lg btn-block" value="Creer le Projet"/>
 			</div>
 		</div>
+	</div>
 	</form>
-</div>		
+<script type="text/javascript">
+    function fermeture(div)
+	{
+        $(div).css('display','none');  
+    }
+</script>

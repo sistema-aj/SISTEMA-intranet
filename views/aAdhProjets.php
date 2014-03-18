@@ -1,7 +1,17 @@
 <h1 class="title"> Demande d'adhésion à un projet </h1>
 <hr class="hrTitle"/>
-
-<?php if(!empty($data->adhesions)) { ?>
+<?php 
+ if($data->succes != "")
+{
+	echo "<div class=\"alert-message fade in succes\" id=\"divsucces\" style=\"display:block;\">$data->succes<a href=\"#\" onclick=\"fermeture('#divsucces');return false;\" class=\"close\">x</a></div>";
+}
+if($data->error != "")
+{
+	echo "<div class=\"alert-message fade in error\" id=\"diverror\" style=\"display:block;\">$data->error<a href=\"#\" onclick=\"fermeture('#diverror');return false;\" class=\"close\">x</a></div>";
+}
+if(!empty($data->adhesions)) 
+{ 
+?>
 <table class="table table-bordered table-striped" id="aAdhProjets" style="width:100%">
 	<tr>
 		<th>Nom</th>
@@ -46,3 +56,9 @@
 	<img id='x-mark' src="x-mark.png"/>
 </div>
 <div id="shadowing" style="z-index:1"></div>
+<script type="text/javascript">
+    function fermeture(div)
+	{
+        $(div).css('display','none');  
+    }
+</script>

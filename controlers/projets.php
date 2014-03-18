@@ -1,10 +1,11 @@
 <?php
 	ViewManager::setActiveCss(array('general'));
 	ViewManager::setActiveJs(array('display-fiche'));
-
 	ViewManager::displayHeader();
-
-	switch ($_SESSION['user_type']) {
+	$data->succes ="";
+	$data->error ="";
+	switch ($_SESSION['user_type']) 
+	{
 		case 'A':
 				if(isset($_REQUEST["action"])) 
 				{
@@ -15,30 +16,20 @@
 						ViewManager::displayViews(array("aMenu","aProAjout"));
 						break;
 
-						case 'ajout-action' : 
-						if(Projets::issetProjetsParams($_REQUEST)) 
-						{
-							if(Projets::checkProjetsParams($_REQUEST)) 
-							{
+						case 'ajout-action' : 						
 								try 
 								{
 									ProjetsDataLayer::creerProjet($_REQUEST['titre'], $_REQUEST['description'], $_REQUEST['type'], $_REQUEST['client']);
-									echo 'ajout effectué';
+									$data->succes = "Enregistrement effectué";
 									$data->titre   = 'Projets en cours';
 									$data->projets = ProjetsDataLayer::getProjetsNonArchives();
-									//ViewManager::displayViews(array("aMenu", "aSubMenu", "aProListe"));
-								} catch (Exception $e) 
+									ViewManager::displayViews(array("aMenu","aProListe"));
+								} 
+								catch (Exception $e) 
 								{
-										$data->error = "Erreur survenue durant l'insertion en base de données";
-										echo 'Erreur 1';
-								}
-							} 
-							else 
-							{
-								$data->error = "Veuillez saisir toutes les données.";
-								echo 'erreur 2';
-							}
-						}
+										$data->error = "Une erreur est survenue, veuillez réessayer";
+										ViewManager::displayViews(array("aMenu","aProAjout"));									
+								}									
 						break;
 
 						case 'liste' : 
@@ -55,7 +46,8 @@
 
 						case 'non-affectes' : 
 						$data->projets = ProjetsDataLayer::getProjetsNonAffectes('titre');
-						$data->titre   = 'Projets Non Affectes ';
+
+						$data->titre   = 'Projets Non Affectes ';						
 						ViewManager::displayViews(array("aMenu", "aProListe"));
 						break;
 
@@ -128,6 +120,5 @@
 			# code...
 			break;	
 	}
-
 	ViewManager::displayFooter();
 ?>

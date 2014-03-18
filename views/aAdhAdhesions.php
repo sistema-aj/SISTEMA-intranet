@@ -1,7 +1,17 @@
 <h1 class="title"> Demande d'adhésion à SISTEMA </h1>
 <hr class="hrTitle"/>
-
-<?php if(!empty($data->candidats)) { ?>
+<?php  
+ if($data->succes != "")
+{
+	echo "<div class=\"alert-message fade in succes\" id=\"divsucces\" style=\"display:block;\">$data->succes<a href=\"#\" onclick=\"fermeture('#divsucces');return false;\" class=\"close\">x</a></div>";
+}
+if($data->error != "")
+{
+	echo "<div class=\"alert-message fade in error\" id=\"diverror\" style=\"display:block;\">$data->error<a href=\"#\" onclick=\"fermeture('#diverror');return false;\" class=\"close\">x</a></div>";
+}
+if(sizeof($data->candidats) != 0)
+{
+?>
 <table class="table table-bordered table-striped" id="aAdhSistema" style="width:100%">
 	<tr>
 		<th>Nom</th>
@@ -11,7 +21,9 @@
 		<th>Mail</th>
 		<th>Validation</th>
 	</tr>
-	<?php foreach ($data->candidats as $user) { ?>
+	<?php foreach ($data->candidats as $user) 
+	{ 
+	?>
 	<tr>
 		<td><?php echo $user->nom; ?></td>
 		<td><?php echo $user->prenom; ?></td>
@@ -31,8 +43,22 @@
 			</form>
 		</td>
 	</tr>
-	<?php } ?>
+	<?php 
+	} 
+	?>
 </table>
-<?php } else { ?>
+<?php 
+} 
+else 
+{ 
+?>
 	<div style="text-align:center">Aucune demande d'adhésion à SISTEMA n'est en cours.</div>
-<?php } ?>
+<?php 
+} 
+?>
+<script type="text/javascript">
+    function fermeture(div)
+	{
+        $(div).css('display','none');  
+    }
+</script>
