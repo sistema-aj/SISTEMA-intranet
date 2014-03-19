@@ -1,5 +1,11 @@
 <?php
 
+	/**
+	 * Cette classe regroupe l'ensemble des variables de configuration de l'intranet
+	 * @author  Guemas Anthony
+	 * @package app
+	 * @version 1.0.0
+	 */
 	class Config
 	{
 		public static $_nomSite			= "Intranet Sistema" ;

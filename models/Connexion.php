@@ -1,7 +1,9 @@
 <?php
 
 	/**
+	 * @author Guemas Anthony
 	 * @package Models
+	 * @version 1.0.0
 	 */
 	class Connexion
 	{
@@ -15,7 +17,8 @@
 		 * @return  Utilisateur
 		 * @version 0
 		 */
-		public function getUtilisateur($idUtilisateur, $type)  {
+		public function getLogin($idUtilisateur, $type)  
+		{
 
 		}
 

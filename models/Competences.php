@@ -1,7 +1,9 @@
 <?php
 
 	/**
+     * @author  Guemas Anthony
 	 * @package Models
+     * @version 1.1.0
 	 */
 	class Competences 
 	{
@@ -10,8 +12,8 @@
 		 * 
 		 * @author  Guemas Anthony
 		 * @param   String $idAdherent 
-		 * @param   int    $idCompetence 
-		 * @version 1
+		 * @param   Integer    $idCompetence 
+		 * @version 1.0.0
 		 */
 		public static function ajoutCompetence($idAdherent, $idCompetence)
 		{
@@ -19,7 +21,8 @@
             {
                 bdd::$_pdo->beginTransaction();
                 $insert = bdd::$_pdo->prepare("INSERT INTO detenir (user, competence)
-                                                VALUES (:idA , :idC)");
+                                                      VALUES       (:idA, :idC)");
+
                 $insert->bindParam(':idA',$idAdherent,PDO::PARAM_INT);
                 $insert->bindParam(':idC',$idCompetence,PDO::PARAM_INT);
                 $insert->execute();
@@ -35,10 +38,10 @@
 		/**
 		 * enlève la competence à l'adherent
 		 * 
-		 * @author
-		 * @param  String $idAdherent 
-		 * @param  int    $idCompetence 
-		 * @version 0
+		 * @author  Guemas Anthony
+		 * @param   String $idAdherent 
+		 * @param   int    $idCompetence 
+		 * @version 1.0.0
 		 */
 		public static function supppressionCompetence($idAdherent, $idCompetence)
 		{
@@ -61,9 +64,9 @@
 		/**
 		 * ajoute une competence à la liste de celles deja existantes
 		 * 
-		 * @author
+		 * @author  Guemas Anthony
 		 * @param   String $nomCompetence 
-		 * @version 0
+		 * @version 1.0.0
 		 */
 		public static function listerNouvelleCompetence($nomCompetence)
 		{
@@ -87,9 +90,9 @@
 		 * récupère la liste des etudiants possedant la competence demandée 
 		 * 
 		 * @author  Guemas Anthony
-		 * @param   int 	  $idCompetence 
+		 * @param   Integer	  $idCompetence 
 		 * @return  array 	  Liste des identifiants des adherents  
-		 * @version 0
+		 * @version 1.1.0
 		 */
 		public static function getAdherentParCompetence($idCompetence)
 		{
@@ -97,7 +100,7 @@
             {
                 $result = bdd::$_pdo->prepare(" SELECT telephone, mail, adresse, codePostal, ville, actif, nom, prenom, promo
                                                 FROM utilisateur JOIN adherent ON utilisateur.id = adherent.id
-                                                JOIN detenir ON adherent.id = detenir.user 
+                                                                 JOIN detenir  ON adherent.id = detenir.user 
                                                 WHERE detenir.competence = :idC");
                 $result->bindParam(":idC", $idCompetence, PDO::PARAM_INT);
                 $result->execute();
@@ -113,8 +116,8 @@
          * récupère la liste des compétences pour un étudiant 
          * 
          * @author  Deleuil Maxime
-         * @param   int       $id 
-         * @return  array     Liste des compétences de l'adhérent  
+         * @param   Integer   $id 
+         * @return  Array     Liste des compétences de l'adhérent  
          * @version 1.0.0
          */
         public static function getCompetencesParAdh($id) {

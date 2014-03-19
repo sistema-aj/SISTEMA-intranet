@@ -1,7 +1,9 @@
 <?php 
 
 	/**
+	 * @author  Guemas Antony
 	 * @package Models
+	 * @version 1.1.0
 	 */
 	class ProjetsDataLayer
 	{
@@ -12,7 +14,7 @@
 		 * @author  Guemas Anthony
 		 * @param   int   $idClient 
 		 * @return  array liste des projets sous forme d'array
-		 * @version 1
+		 * @version 1.1.0
 		 */
 		public static function getProjetParClient($idClient) 
 		{
@@ -38,9 +40,9 @@
 		 * récupère les informations d'un projet et retourne un objet "projet" correspondant
 		 * 
 		 * @author 	Guemas Anthony
-		 * @param   int   $idProjet 
+		 * @param   Integer  $idProjet 
 		 * @return  projet 
-		 * @version 1
+		 * @version 1.1.0
 		 */
 		public static function getDetailProjet($idProjet) 
 		{
@@ -71,7 +73,7 @@
 		 * @author 	Guemas Anthony
 		 * @param   String $critereTri 	[type / client] 
 		 * @return  Array
-		 * @version 1
+		 * @version 1.1.0
 		 */
 		public static function getProjetsNonAffectes($critereTri)
 		{
@@ -80,7 +82,7 @@
 				// recuperation des informations
 				$result = bdd::$_pdo->prepare(" SELECT projet.id, titre, description, type, status, raisonSociale as client
 												FROM   projet JOIN client ON client.id = projet.client 
-												WHERE status = 'N'
+												WHERE  status = 'N'
 												ORDER BY :tri");
 				$result->bindParam(":tri", $critereTri, PDO::PARAM_INT);
 				$result->execute();
@@ -100,7 +102,7 @@
 		 * @author 	Guemas Anthony
 		 * @param   String $critereTri 	[type / client] 
 		 * @return  Array
-		 * @version 1
+		 * @version 1.1.0
 		 */
 		public static function getProjetsActifsTermines($critereTri) 
 		{
@@ -127,10 +129,10 @@
 		 * Crée un Projet en base 
 		 * 
 		 * @author  Guemas Anthony
-		 * @param  $titre 
-         * @param  $description
-         * @param  $client
-		 * @version 2
+		 * @param   $titre 
+         * @param   $description
+         * @param   $client
+		 * @version 2.0.0
 		 */
 		public static function CreerProjet($titre, $description, $type, $client)
 		{
@@ -164,7 +166,7 @@
 		 * 
 		 * @author  Guemas Anthony
 		 * @return 	array 	Liste d'adherents 
-		 * @version 0
+		 * @version 1.0.0
 		 */
 		public static function getAdhesions()
 		{
@@ -173,9 +175,9 @@
 				// recuperation des informations
 				$result = bdd::$_pdo->query(" SELECT utilisateur.id, projet.id as projet, titre, telephone, mail,
 											adresse, codePostal, ville, actif, nom, prenom, promo
-											FROM utilisateur JOIN adherent ON utilisateur.id = adherent.id
-											JOIN participer ON adherent.id = participer.user
-											JOIN projet ON projet.id = participer.projet
+											FROM utilisateur JOIN adherent 	 ON utilisateur.id = adherent.id
+															 JOIN participer ON adherent.id = participer.user
+															 JOIN projet 	 ON projet.id = participer.projet
 											WHERE participer.status = 'A'");
 				$result->setFetchMode(PDO::FETCH_OBJ);
 				$result = $result->fetchAll();
@@ -192,7 +194,7 @@
 		 * 
 		 * @author  Guemas Anthony
 		 * @param   identifiant $id  identifiant du projet dont on veut obtenir la liste des demandes 
-		 * @version 0
+		 * @version 1.0.0
 		 */
 		public static function getAdhesionsParProjet($id)
 		{
@@ -223,7 +225,7 @@
          * 
          * @author  Guemas Anthony
          * @param   identifiant $id  identifiant du projet dont on veut obtenir la liste des adherents
-         * @version 0
+         * @version 1.0.0
          */
         public static function getAdherentsParProjet($id)
         {
@@ -255,7 +257,7 @@
          * 
          * @author  Guemas Anthony
          * @param   identifiant $adherent  identifiant de l'adherent sur lequel porte la requete 
-         * @version 0
+         * @version 1.0.0
          */
         public static function getProjetParAdherent($adherent)
         {
@@ -315,7 +317,8 @@
          * récupère la liste des projets non terminés
          * 
          * @author  Guemas Anthony
-         * @version 0
+         * @return  Array
+         * @version 1.0.0
          */
         public static function getProjetsNonArchives()
         {
@@ -323,7 +326,7 @@
             {
                 // recuperation des informations
                 $result = bdd::$_pdo->prepare(" SELECT   projet.id, titre, description, type, projet.status, raisonSociale as client
-                                                FROM     projet JOIN client     ON projet.client = client.id
+                                                FROM     projet JOIN client ON projet.client = client.id
                                                 WHERE    status NOT IN ('A') 
                                                 GROUP BY status  
                                              ");
@@ -339,23 +342,6 @@
             }
         }
 
-         /**
-         * Change le chef de Projet
-         * 
-         * @author  Guemas Anthony
-         * @version 0
-         */
-        public static function setChefProjet($id)
-        {
-            try
-            {
-               
-            }
-            catch(Exception $e)
-            {
-                return $e;
-            }
-        }
 
 	}
 ?>

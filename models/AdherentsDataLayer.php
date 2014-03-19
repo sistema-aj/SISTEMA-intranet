@@ -1,6 +1,8 @@
 <?php
 	/**
+	 * @author  Deleuil Maxime
 	 * @package Models
+	 * @version 1.2.0
 	 */
 	class AdherentsDataLayer {
 		/**
@@ -29,6 +31,7 @@
 		/**
 		 * retourne l'objet d'Adherent en fonction de l'identifiant entré en paramétre 
 		 * @author  Deleuil Maxime
+		 * @param   $id 
 		 * @return  objet Adherent
 		 * @version 1.0.0
 		 */

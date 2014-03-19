@@ -1,6 +1,7 @@
 <?php
 
 	/**
+	 * @author Guemas Anthony
 	 * @package Models
 	 */
 	class Incidents 
@@ -34,8 +35,8 @@
 		 * Modifie l'etat de l'incident
 		 * 
 		 * @author 
-		 * @param  type $idIncident 
-		 * @param  type $nouvelEtat 
+		 * @param  String $idIncident 
+		 * @param  String $nouvelEtat 
 		 * @return type
 		 * @version 0
 		 */
@@ -47,8 +48,8 @@
 		 * Crée un incident, possédant l'état "à traiter"
 		 * 
 		 * @author 
-		 * @param   type $typeRapport 
-		 * @param   type $message 
+		 * @param   String $typeRapport 
+		 * @param   String $message 
 		 * @return  type
 		 * @version 0
 		 */

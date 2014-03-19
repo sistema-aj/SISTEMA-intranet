@@ -14,7 +14,7 @@
 		 * initialise la connection avec la base de données 
 		 * 
 		 * @author  Deleuil Maxime 
-		 * @version 1
+		 * @version 1.0.0
 		 */
 		public static function init() 
 		{
@@ -28,7 +28,7 @@
 		 * @author  Deleuil Maxime
 		 * @param   String $table 
 		 * @return  array
-		 * @version 1
+		 * @version 1.1.0
 		 */
 		public static function getAllByTable($table) 
 		{
@@ -49,10 +49,10 @@
 		 * récupère le contenu d'une table selon l'identifiant
 		 * 
 		 * @author  Deleuil Maxime
-		 * @param   type $table 
-		 * @param   type $id 
+		 * @param   String $table 
+		 * @param   Integer $id 
 		 * @return  array
-		 * @version 1
+		 * @version 1.1.0
 		 */
 		public static function getById($table, $id) 
 		{
@@ -73,10 +73,10 @@
 		 * récupère le contenu d'une table, trié selon le chammp passé en parametre 
 		 * 
 		 * @author  Deleuil Maxime 
-		 * @param   type $table 
-		 * @param   type $arrColumn 
-		 * @return  type
-		 * @version 1
+		 * @param   String $table 
+		 * @param   String $arrColumn 
+		 * @return  Array
+		 * @version 1.0.0
 		 */
 		public static function getAllByTableOrderBy($table, $arrColumn) 
 		{
@@ -104,7 +104,7 @@
 		 * @param  String $login 
 		 * @param  String $mdp 
 		 * @return boolean 
-		 * @version 1
+		 * @version 1.1.0
 		 */
 		public static function getLogin($login, $mdp) 
 		{
@@ -129,7 +129,7 @@
 		 *  récupère la liste des adherents inactifs 
 		 * @author  Deleuil Maxime
 		 * @return  array
-		 * @version 1
+		 * @version 1.0.0
 		 */
 		public static function getInactiveAdh() 
 		{
@@ -148,36 +148,12 @@
 			}
 		}
 
-		/**
-		 *  récupère la liste des adherents demandant à participer à un projet
-		 * @author
-		 * @return type
-		 * @version 1
-		 */
-		public static function getAdhesionsPro()
-		{
-			try 
-			{
-				$result = self::$_pdo->query("SELECT nom, prenom, promo, telephone, mail, titre
-									FROM utilisateur JOIN adherent ON utilisateur.id = adherent.id 
-									JOIN participer ON utilisateur.id = participer.user
-									JOIN projet ON projet.id = participer.projet
-									WHERE status = 'A'");
-				$result->setFetchMode(PDO::FETCH_OBJ);
-				$result = $result->fetchAll();
-				return $result;
-			} 
-			catch(Exception $e)
-			{
-				return $e;
-			}
-		}
 
 		/**
 		 *  récupère la liste des adherents actifs 
 		 * @author  Deleuil Maxime
 		 * @return  array
-		 * @version 1
+		 * @version 1.0.0
 		 */
 		public static function getActiveAdh() 
 		{

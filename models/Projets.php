@@ -1,7 +1,14 @@
 <?php
 
 	/**
+	 * @author Guemas Anthony
 	 * @package Models
+	 * @param String $titre
+	 * @param String $description
+	 * @param String $type
+	 * @param String $status
+	 * @param String $client
+	 * @version 1.2.0
 	 */
 	class Projets 
 	{
@@ -20,16 +27,26 @@
 			$this->client = $client;
 		}
 
+		
 		/**
-		 * verifie que les variables necessaires à la creation d'un projet soient peresentes 
+		 * verifie que les variables necessaires à la creation d'un projet soient presentes 
+		 * @author  Guemas Anthony
+		 * @param   Array $data 
+		 * @return  boolean
+		 * @version 1.1.0
 		 */
 		public static function issetProjetsParams($data)
 		{
 			return isset($data['titre']) && isset($data['description']) && isset($data['client']);
 		}
 
+
 		/**
 		 * verifie que les variables necessaires à la creation d'un projet soient du bon type
+		 * @author  Guemas Antony
+		 * @param   Array $data 
+		 * @return  boolean
+		 * @version 1.1.0
 		 */
 		public static function checkProjetsParams($data)
 		{

@@ -1,4 +1,9 @@
 <?php
+
+	/**
+	 * @author  Deleuil Maxime
+	 * @package Models
+	 */
 	class ClientsDataLayer
 	{
 		/**
@@ -26,6 +31,7 @@
 		/**
 		 * retourne l'objet de Client en fonction de l'identifiant entré en paramétre 
 		 * @author  Deleuil Maxime
+		 * @param   Integer $id identifiant du Client
 		 * @return  objet Client
 		 * @version 1.0.0
 		 */
