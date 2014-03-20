@@ -21,7 +21,6 @@
 		}
 	}
 	
-	ViewManager::displayHeader();
+	ViewManager::displayHeaderLogin();
 	ViewManager::displayViews(array('connexion'));
-	ViewManager::displayFooter();
 ?>

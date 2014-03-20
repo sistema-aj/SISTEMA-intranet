@@ -17,7 +17,6 @@
 		}
 	}
 
-	ViewManager::displayHeader();
+	ViewManager::displayHeaderLogin();
 	ViewManager::displayViews(array('inscription'));
-	ViewManager::displayFooter();
 ?>

@@ -41,7 +41,7 @@
 					</li> 
 	            </ul>
 	            <ul class="nav navbar-nav navbar-right">
-	                <li><a href="<?php echo URL_ROOT; ?>/deconnexion"><img src="assest/img/logoutIcon.png" width="20px"/> Déconnexion</a></li>
+	                <li><a href="<?php echo URL_ROOT; ?>deconnexion"><img src="assest/img/logoutIcon.png" width="20px"/> Déconnexion</a></li>
 	            </ul>
 			</div>
 	</nav>

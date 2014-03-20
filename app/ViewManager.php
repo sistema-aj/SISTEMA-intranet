@@ -46,12 +46,20 @@
 			include_once VIEWS.'header.php';
 		}
 
+		public static function displayHeaderLogin() {
+			$data = self::$_data;
+			// include start of skeleton			
+			include_once VIEWS.'sk_top.php';
+			include_once VIEWS.'headerLogin.php';
+		}		
+
 		public static function displayFooter() {
 			$data = self::$_data;
 			// include end of skeleton
 			include_once VIEWS.'footer.php';
 			include_once VIEWS.'sk_bottom.php';
 		}
+
 
 		public static function displayViews($viewsArray) {
 			$data = self::$_data;

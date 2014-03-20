@@ -1,41 +1,51 @@
 <div id="inscription">
-	<?php if($data->msg == "" || $data->error != "") { ?>
-	<!-- Si aucun message personnalisé à afficher -->
-		<form id="inscription-form" name="inscription" action="" method="post">
-			<label>Nom :</label><br/>
-			<input id="nom" type="text" name="nom"><br/>
-			<label>Prenom :</label><br/>
-			<input id="prenom" type="text" name="prenom"><br/>
-			<label>Promo :</label><br/>
-			<select name="promo">
-				<option value="L3G">L3G</option>
-				<option value="L3I">L3I</option>
-				<option value="M1">M1</option>
-				<option value="M2">M2</option>
-			</select><br/>
-			<label>Telephone :</label><br/>
-			<input id="telephone" type="text" name="telephone"><br/>
-			<label>Mail :</label><br/>
-			<input id="mail" type="text" name="mail"><br/>
-			<label>Adresse :</label><br/>
-			<input id="adresse" type="text" name="adresse"><br/>
-			<label>Code Postal :</label><br/>
-			<input id="codePostal" type="text" name="codePostal"><br/>
-			<label>Ville :</label><br/>
-			<input id="ville" type="text" name="ville"><br/>
-			<input type ="submit" value="Inscription"/>
-		</form>
-		<?php if($data->error != "") { ?>
-			<div id="error" style="color:red">
-				<?php echo $data->error; ?>
+	<div class="container">
+		<div class="col-sm-4"></div>
+		<div class="col-sm-5" id="formConnexion">
+			<form class="form" id="inscription-form" name="inscription" action="" method="post">
+			<div class="form-group">
+				<label>Nom :</label>
+				<input class="form-control" id="nom" type="text" name="nom">
 			</div>
-		<?php } ?>
-	<!-- Fin du bloc -->
-	<?php } else { ?>
-	<!-- Si il y a un message personnalisé à afficher -->
-		<div id="message">
-			<p><?php echo $data->msg; ?></p>
+			<div class="form-group">
+				<label>Prenom :</label>
+				<input class="form-control" id="prenom" type="text" name="prenom">
+			</div>
+			<div class="form-group">
+				<label>Promo :</label>
+				<select class="form-control" name="promo">
+					<option value="L3G">L3G</option>
+					<option value="L3I">L3I</option>
+					<option value="M1">M1</option>
+					<option value="M2">M2</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label>Telephone :</label>
+				<input class="form-control" id="telephone" type="text" name="telephone">
+			</div>
+			<div class="form-group">
+				<label>Mail :</label>
+				<input class="form-control" id="mail" type="text" name="mail">
+			</div>
+			<div class="form-group">
+				<label>Adresse :</label>
+				<input  class="form-control" id="adresse" type="text" name="adresse">
+			</div>
+			<div class="form-group">
+				<label>Code Postal :</label>
+				<input class="form-control" id="codePostal" type="text" name="codePostal">
+			</div>
+			<div class="form-group">
+				<label>Ville :</label>
+				<input class="form-control" id="ville" type="text" name="ville">
+			</div>
+			<div class="form-group">
+				<input class="btn btn-info btn-lg btn-block" type ="submit" value="Inscription"/>
+			</div>
+		</form>
 		</div>
-	<!-- Fin du bloc -->
-	<?php } ?>
+		<div class="col-sm-3"></div>
+
+	</div>
 </div>
