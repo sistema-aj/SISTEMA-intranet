@@ -1,4 +1,9 @@
 <?php
+
+	/**
+	 * 
+	 * @package app
+	 */
 	class Router {
 		private static $_data;
 

@@ -1,7 +1,9 @@
 <?php
 
 	/**
+	 * @author Guemas Antony
 	 * @package Models
+	 * @version 1.0.0
 	 */
 	class UtilisateurDataLayer {
 		/**

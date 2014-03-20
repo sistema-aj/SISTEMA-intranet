@@ -1,7 +1,26 @@
 <?php
+
+	/**
+	 * @author  Marnier Vivien
+	 * @package Models
+	 * @version 2.0.0
+	 */
 	class Administration 
 	{
 	
+		/**
+		 * Insere un candidat dans la base 
+		 * @author   Marnier Vivien
+		 * @param    String $nom 
+		 * @param    String $prenom 
+		 * @param    String $mail 
+		 * @param    String $telephone 
+		 * @param    String $adresse 
+		 * @param    String $codePostal 
+		 * @param    String $ville 
+		 * @param    String $promo 
+		 * @version  1.2.0
+		 */
 		public static function creerCandidat($nom,$prenom,$mail,$telephone,$adresse,$codePostal,$ville,$promo) 
 		{
 			try
@@ -40,6 +59,13 @@
 			}
 		}
 
+		/**
+		 * Verifie l'existence de toutes les variables pour la creation d'un candidat
+		 * @author Deleuil Maxime 
+		 * @param  Array $data Liste des variables 
+		 * @return boolean 
+		 * @version 1.0.0
+		 */
 		public static function issetCandidatParams($data) {
 			if(isset($data['nom']) && isset($data['prenom']) && isset($data['telephone'])
 				&& isset($data['mail']) && isset($data['adresse']) && isset($data['codePostal'])
@@ -51,6 +77,13 @@
 			}
 		}
 
+		/**
+		 * Verifie l'integrité des variables pour la creation d'un candidat, et la formate 
+		 * @author Deleuil Maxime
+		 * @param  Array $data Liste des variables  
+		 * @return boolean
+		 * @version 1.2.0
+		 */
 		public static function checkCandidatParams(&$data) {
 			if($data['nom'] != "" && $data['prenom'] != "" && $data['telephone'] != ""
 				&& $data['mail'] != "" && $data['adresse'] != "" && $data['codePostal'] != ""
@@ -77,6 +110,20 @@
 			}
 		}
 		
+
+		/**
+		 * Crée un Client en base de données
+		 * 
+		 * @author Vivien Marnier
+		 * @param  String $raisonSociale 
+		 * @param  String $telephone 
+		 * @param  String $mail 
+		 * @param  String $adresse 
+		 * @param  String $codePostal 
+		 * @param  String $ville 
+		 * @throws Exception erreur
+		 * @version 1.0.0 
+		 */
 		public static function creerClient($raisonSociale,$telephone,$mail,$adresse,$codePostal,$ville)
 		{
 			try
@@ -142,10 +189,18 @@
 			catch (Exception $e) 
 			{
 			  bdd::$_pdo->rollBack();
-			  echo "Failed: " . $e->getMessage();
+			  throw new Exception("Une erreur est survenue, veuillez réesayer");
 			}
 		}
 
+
+		/**
+		 * Verifie l'existence et l'integrité des variables pour la creation d'un candidat, et la formate 
+		 * @author Deleuil Maxime
+		 * @param  Array $data Liste des variables  
+		 * @return boolean
+		 * @version 1.1.0
+		 */
 		public static function checkClientParams($data) {
 			if(isset($_REQUEST['raisonSociale']) && isset($_REQUEST['telephone']) && isset($_REQUEST['mail'])
 				&& isset($_REQUEST['adresse']) && isset($_REQUEST['codePostal']) && isset($_REQUEST['ville']))
@@ -160,6 +215,12 @@
 			}
 		}
 
+		/**
+		 * récupère un candidat depuis la base de données 
+		 * @author Vivien Marnier 
+		 * @return Array Tableau contenant l'ensemble des propriétés du candidat 
+		 * @version 1.0.0
+		 */
 		public static function getCandidats() 
 		{
 			try
@@ -177,6 +238,15 @@
 			}
 		}
 			
+		/**
+		 * Crée un login, selon le type de l'utilisateur.
+		 * 
+		 * @author Marnier Vivien
+		 * @param  String  $userType
+		 * @param  Integer $idUser 
+		 * @return String
+		 * @version 1.2.0
+		 */
 		public static function genererLogin($userType, $idUser)
 		{//TODO à tester ...
 			switch($userType)
@@ -265,12 +335,24 @@
 			return $mdp;
 		}
 
+		/**
+		 * Description
+		 * 
+		 * @author
+		 * @param   type $p 
+		 * @param   type $s 
+		 * @param   type $c 
+		 * @param   type $kl 
+		 * @param   type $a 
+		 * @return  type
+		 * @version 2.0.0
+		 */
 		public static function hash_password( $p, $s='', $c=1000, $kl=32, $a = 'sha256' ) 
 		{
 		 
-			$hl = strlen(hash($a, null, true)); # Hash length
-			$kb = ceil($kl / $hl);              # Key blocks to compute
-			$dk = '';                           # Derived key
+			$hl = strlen(hash($a, null, true)); # taille du Hash
+			$kb = ceil($kl / $hl);              # blocks
+			$dk = '';                           # clé dérivée
 		
 			$autorises = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789!#@$%.:,';
 			$nb_aut = strlen($autorises)-1;
@@ -281,27 +363,34 @@
 				  $s .= $autorises[mt_rand(0, $nb_aut)];
 			}
 
-			# Create key
+			# Creation de la clé
 			for ( $block = 1; $block <= $kb; $block ++ ) {
 		 
-				# Initial hash for this block
+				# hash de base pour le block
 				$ib = $b = hash_hmac($a, $s . pack('N', $block), $p, true);
 		 
-				# Perform block iterations
+				# parcours des blocks
 				for ( $i = 1; $i < $c; $i ++ )
 		 
-					# XOR each iterate
+					# Ou Exlusif sur chaque block
 					$ib ^= ($b = hash_hmac($a, $b, $p, true));
 		 
-				$dk .= $ib; # Append iterated block
+				$dk .= $ib; # Ajout de chaque block
 			}
 		 
-			# Return derived key of correct length
+			# retourne la clé derivée de la bonne taille 
 			$password_hash = substr($dk, 0, $kl);
 			$password_change = bin2hex($password_hash);
 			return $password = $s.$password_change;
 		}
-		
+			
+		/**
+		 * Valide l'inscription d'un candidat, en lui attribuant un login et un mot de passe 
+		 * @author Marnier Vivien 
+		 * @param   String $idCandidat 
+		 * @param   String $mailCandidat 
+		 * @version 1.0.0
+		 */
 		public static function validationCandidat($idCandidat, $mailCandidat) 
 		{
 			try
@@ -353,6 +442,13 @@
 			}	
 		}
 
+		/**
+		 * Refuse l'adhesion d'un candidat, et le supprime de la base
+		 * @author  Marnier Vivien
+		 * @param   Integer $id 
+		 * @param   String $mail
+		 * @version 1.2.0 
+		 */
 		public static function refusCandidat($id, $mail)
 		{
 			try
@@ -363,7 +459,7 @@
 											WHERE id = :id");
 				$result->bindParam(":id",$id,PDO::PARAM_INT);
 				$result->execute();
-				// activation de l'utilisateur
+				// supression de l'utilisateur
 				$result = bdd::$_pdo->prepare("DELETE FROM utilisateur
 											WHERE id = :id");
 				$result->bindParam(":id",$id,PDO::PARAM_INT);
@@ -378,7 +474,7 @@
 					$message = 'Bonjour,
 
 					Nous vous informons que votre candidature a été refusée par la direction de SISTEMA.
-					Cependant, ceci ne remet pas en cause la qualité de votre profil.
+					Cependant, ceci ne remet pas en cause la qualité de votre profil, et vous souhaitons une bonne continuation.
 
 					Cordialement,
 					La direction de SISTEMA.
@@ -395,6 +491,13 @@
 			}
 		}
 
+		/**
+		 * Accepte la candidature d'un adherent à un projet
+		 * @author  Deleuil Maxime
+		 * @param   Integer $idAdh  identifiant de l'adhrent
+		 * @param   Integer $idPro  identifiant du projet
+		 * @version 1.0.0
+		 */
 		public static function accepterCandidatureProjet($idAdh, $idPro)
 		{
 			try {
@@ -411,6 +514,14 @@
 			}
 		}
 
+
+		/**
+		 * Refuse la candidature d'un adherent à un projet
+		 * @author  Deleuil Maxime
+		 * @param   Integer $idAdh Identifiant de l'adherent  
+		 * @param   Integer $idPro Identifiant du projet
+		 * @version 1.0.0
+		 */
 		public static function refuserCandidatureProjet($idAdh, $idPro)
 		{
 			try {
@@ -427,6 +538,13 @@
 			}	
 		}
 
+		/**
+		 * affecte un adherent à un projet 
+		 * @author  Deleuil Maxime 
+		 * @param   Integer $idAdh Identifiant de l'adherent 
+		 * @param   Integer $idPro Identifiant du projet
+		 * @version 1.1.0
+		 */
 		public static function affecterAuProjet($idAdh, $idPro) 
 		{
 			try {
@@ -443,14 +561,52 @@
 			}
 		}
 
+		/**
+		 * Enleve un adherent de la liste des participants au projet
+		 * @author  Guemas Anthony
+		 * @param   Integer $idAdh Identifiant de l'adherent
+		 * @param   Integer $idPro Identifiant du projet
+		 * @version 1.0.0
+		 */
 		public static function detacherDuProjet($idAdh, $idPro)
 		{
+			try {
+				bdd::$_pdo->beginTransaction();
+				$insert = bdd::$_pdo->prepare("DELETE FROM participer
+													  WHERE user = :user 
+													  AND   projet = :projet");
 
+				$insert->bindParam(":user",$idAdh,PDO::PARAM_INT);
+				$insert->bindParam(":projet",$idPro,PDO::PARAM_INT);
+				$insert->execute();
+				bdd::$_pdo->commit();
+			} catch (Exception $e) {
+				bdd::$_pdo->rollBack();
+				throw new Exception($e->getMessage());
+			}
 		}
 
+		/**
+		 * Insere un adherent en tant que chef de projet 
+		 * @author  Guemas Anthony
+		 * @param   Integer $idAdh Identifiant de l'adherent
+		 * @param   Integer $idPro Identifiant du projet
+		 * @version 1.0.0
+		 */
 		public static function nommerChefProjet($idAdh, $idPro) 
 		{
-
+			try {
+				bdd::$_pdo->beginTransaction();
+				$insert = bdd::$_pdo->prepare("INSERT INTO participer
+													  VALUES (:user, :projet, 1, 'O')");
+				$insert->bindParam(":user",$idAdh,PDO::PARAM_INT);
+				$insert->bindParam(":projet",$idPro,PDO::PARAM_INT);
+				$insert->execute();
+				bdd::$_pdo->commit();
+			} catch (Exception $e) {
+				bdd::$_pdo->rollBack();
+				throw new Exception($e->getMessage());
+			}
 		}
 	}
 ?>

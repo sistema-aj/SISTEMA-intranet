@@ -1,3 +1,8 @@
+<?php if($data->error != "")
+{
+	echo "<div class=\"alert-message fade in error\" id=\"diverror\" style=\"display:block;\">$data->error<a href=\"#\" onclick=\"fermeture('#diverror');return false;\" class=\"close\">x</a></div>";
+}
+?>
 <div id="connexion">
 	<div class="container">
 		<div class="col-sm-4"></div>
@@ -24,6 +29,11 @@
 		<p><a href="<?php echo URL_ROOT; ?>inscription">Pas encore adhérent ?</a></p>
 		</div>
 		<div class="col-sm-3"></div>
-
 	</div>
 </div>
+<script type="text/javascript">
+    function fermeture(div)
+	{
+        $(div).css('display','none');  
+    }
+</script>

@@ -1,6 +1,11 @@
+<?php if($data->error != "")
+{
+	echo "<div class=\"alert-message fade in error\" id=\"diverror\" style=\"display:block;\">$data->error<a href=\"#\" onclick=\"fermeture('#diverror');return false;\" class=\"close\">x</a></div>";
+}
+?>
 <h1 class="title"> Ajouter un client </h1>
 <hr class="hrTitle"/>
-<form class="form-horizontal" role="form" name="addCli" action="" method="post">
+<form class="form-horizontal" role="form" name="addCli" action="<?php echo URL_ROOT; ?>clients/ajoutClient"" method="post">
 	<div class="form-group" id="aCliAjout">
 		<div class="form-group">
 			<label class="col-sm-2 control-label">Raison Sociale :</label>
@@ -45,3 +50,10 @@
 		</div>
 	</div>
 </form>
+<script type="text/javascript">
+    function fermeture(div)
+	{
+        $(div).css('display','none');  
+    }
+</script>
+

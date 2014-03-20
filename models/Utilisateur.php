@@ -1,6 +1,7 @@
 <?php
 
 	/**
+	 * @author  Guemas Anthony
 	 * @package Models
 	 * @var     $id
 	 * @var 	$tel
@@ -9,6 +10,7 @@
 	 * @var 	$codePostal
 	 * @var 	$ville
 	 * @var     $actif
+	 * @version 1.0.0
 	 */
 	class Utilisateur	
 	{
@@ -37,11 +39,25 @@
 			$this->actif 	= $actif;
 		}
 
+		/**
+		 * Setter de la classe
+		 * @author  Guemas Antony
+		 * @param   String $index variable à laquellle on veut acceder
+		 * @param   type $value 
+		 * @version 1.0.0
+		 */
 		public function __set($index, $value)
 		{
 			$this->$index = $value;
 		}
 		
+		/**
+		 * Getter de la classe 
+		 * @author  Guemas Antony
+		 * @param   String $index variable à laquellle on veut acceder
+		 * @return  type
+		 * @version 1.0.0
+		 */
 		public function __get($index)
 		{
 			return $this->$index;
