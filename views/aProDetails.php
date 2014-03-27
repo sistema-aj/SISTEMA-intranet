@@ -50,6 +50,7 @@
 			?>
 
 		</table>
+		<input type="hidden" name="id" value ="$data->projet->id"> 
 		<input type='submit' value ='Changer Chef de Projet' /> 
 	</form>
 

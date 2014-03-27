@@ -52,8 +52,17 @@
 						break;
 
 						case 'changementCdP' :
-						$data->cDp = $_REQUEST['chefProjet'];
+						$data->adherent = $_REQUEST['chefProjet'];
+						$data->projet   = $_REQUEST['id']
 						
+						// suppression de l'adherent en tant que participant générique
+						Administration::detacherDuProjet($data->adherent, $data->projet);
+
+						// insertion en tant que chef de projet
+						Administration::nommerChefProjet($data->adherent, $data->projet);
+
+						// suppression du chef de projet actuel le cas echeant
+						// insertion en tant que participant générique
 						
 						break;
 
