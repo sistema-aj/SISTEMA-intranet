@@ -17,9 +17,6 @@
 						ViewManager::displayViews(array('aProDetails'));
 					break;
 
-					case 'changementCdP' :
-						
-					break;
 				}
 			}
 			break;

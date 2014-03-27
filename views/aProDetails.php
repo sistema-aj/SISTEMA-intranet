@@ -9,7 +9,7 @@
 	</div>
 
 
-	<form name="changeChefProjet" action="<?php echo URL_ROOT; ?>detail/changementCdP" method="post">
+	<form name="changeChefProjet" action="<?php echo URL_ROOT; ?>projets/changementCdP" method="post">
 
 		<table class="table table-bordered table-striped">
 

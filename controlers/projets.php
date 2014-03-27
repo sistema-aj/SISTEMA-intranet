@@ -51,6 +51,12 @@
 						ViewManager::displayViews(array("aMenu", "aProListe"));
 						break;
 
+						case 'changementCdP' :
+						$data->cDp = $_REQUEST['chefProjet'];
+						
+						
+						break;
+
 						default:
 						ViewManager::displayViews(array("aMenu", "404"));
 						break;
