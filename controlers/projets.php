@@ -54,6 +54,7 @@
 						case 'changementCdP' :
 						$data->adherent = $_REQUEST['chefProjet'];
 						$data->projet   = $_REQUEST['id']
+						$data->oldCdP	= ProjetsDataLayer::getChefProjet($data->projet);
 						
 						// suppression de l'adherent en tant que participant générique
 						Administration::detacherDuProjet($data->adherent, $data->projet);
@@ -61,9 +62,14 @@
 						// insertion en tant que chef de projet
 						Administration::nommerChefProjet($data->adherent, $data->projet);
 
-						// suppression du chef de projet actuel le cas echeant
-						// insertion en tant que participant générique
-						
+						if(isset($data->oldCdP))
+						{
+							// suppression du chef de projet actuel le cas echeant
+							Administration::detacherDuProjet($data->oldCdP, $data->projet);
+
+							// insertion en tant que participant générique
+							Administration::affecterAuProjet($data->oldCdP, $data->projet);
+						}
 						break;
 
 						default:

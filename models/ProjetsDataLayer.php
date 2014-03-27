@@ -342,6 +342,35 @@
             }
         }
 
+		/**
+		 * récupère le  chef de projet du projet passé en parametres  
+		 * @author  Guemas Anthony
+		 * @param   Integer $idPro Identifiant du projet
+		 * @version 1.0.0
+		 */
+		public static function getChefProjet($idPro) 
+		{
+			try
+			{
+				// recuperation des informations
+				$result = bdd::$_pdo->prepare(" SELECT   telephone, mail, adresse, codePostal, ville, actif, nom, prenom, promo
+												FROM     utilisateur JOIN adherent   ON utilisateur.id = adherent.id
+																	 JOIN participer ON adherent.id = participer.user 
+												WHERE 	 participer.chefProjet = 'O'
+												AND 	 participer.projet = :id	
+											 ");
+
+				$result->bindParam(":id", $idPro, PDO::PARAM_INT);
+				$result->execute();
+				$result->setFetchMode(PDO::FETCH_OBJ);
+				$result = $result->fetchAll();
+				return $result;
+			}
+			catch(Exception $e)
+			{
+				return $e;
+			}
+		}
 
 	}
 ?>
