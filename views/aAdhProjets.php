@@ -9,7 +9,7 @@ if($data->error != "")
 {
 	echo "<div class=\"alert-message fade in error\" id=\"diverror\" style=\"display:block;\">$data->error<a href=\"#\" onclick=\"fermeture('#diverror');return false;\" class=\"close\">x</a></div>";
 }
-if(!empty($data->adhesions)) 
+if(sizeof($data->adhesions) != 0) 
 { 
 ?>
 <table class="table table-bordered table-striped" id="aAdhProjets" style="width:100%">

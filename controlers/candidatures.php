@@ -1,5 +1,6 @@
 <?php
 	ViewManager::setActiveCss(array('general'));
+	ViewManager::setActiveJs(array('display-fiche'));
 	ViewManager::displayHeader();
 	$data->succes ="";
 	$data->error = "";
@@ -46,11 +47,13 @@
 						{	
 							Administration::accepterCandidatureProjet($_REQUEST['id'], $_REQUEST['projet']);
 							$data->succes = "Enregistrement effectué";
+							$data->adhesions = ProjetsDataLayer::getAdhesions();
 							ViewManager::displayViews(array("aMenu", "aAdhProjets"));							
 						}
 						catch(Exception $e)
 						{
 							$data->error = "Une erreur est survenue, veuillez réessayer";
+							$data->adhesions = ProjetsDataLayer::getAdhesions();
 							ViewManager::displayViews(array("aMenu", "aAdhProjets"));
 						}
 						break;
@@ -59,11 +62,13 @@
 						{
 							Administration::refuserCandidatureProjet($_REQUEST['id'], $_REQUEST['projet']);
 							$data->succes = "Enregistrement effectué";
+							$data->adhesions = ProjetsDataLayer::getAdhesions();
 							ViewManager::displayViews(array("aMenu", "aAdhProjets"));
 						}
 						catch(Exception $e)
 						{
 							$data->error = "Une erreur est survenue, veuillez réessayer";
+							$data->adhesions = ProjetsDataLayer::getAdhesions();
 							ViewManager::displayViews(array("aMenu", "aAdhProjets"));
 						}
 						break;
