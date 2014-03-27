@@ -1,6 +1,6 @@
 <h1 class="title"> Demande d'adhésion à SISTEMA </h1>
 <hr class="hrTitle"/>
-<?php if(!empty($data->candidats)) { ?>
+<?php if(sizeof($data->candidats) != 0) { ?>
 <table class="table table-bordered table-striped" id="aAdhSistema" style="width:100%">
 	<tr>
 		<th>Nom</th>
@@ -38,7 +38,7 @@
 <br/> 
 <h1 class="title"> Demande d'affectation à un projet </h1>
 <hr class="hrTitle"/>
-<?php if(!empty($data->adhesionsPro)) { ?>
+<?php if(sizeof($data->adhesionsPro) != 0) { ?>
 <table class="table table-bordered table-striped" id="aAdhProjets" style="width:100%">
 	<tr>
 		<th>Nom</th>
